@@ -50,7 +50,7 @@ namespace FormsPrototype.Models
 					else
 						usSize = Math.Floor(usSize) + 0.5;
 
-					return "US" + Math.Round(usSize, 1).ToString();
+					return "US " + Math.Round(usSize, 1).ToString();
 				}
 				else if (gender == Gender.Male)
 				{
@@ -66,7 +66,7 @@ namespace FormsPrototype.Models
 					else
 						usSize = Math.Floor(usSize) + 0.5;
 
-					return "US" + Math.Round(usSize, 1).ToString();
+					return "US " + Math.Round(usSize, 1).ToString();
 				}
 
 				return string.Empty;
@@ -88,7 +88,7 @@ namespace FormsPrototype.Models
 					else
 						euSize = Math.Floor(euSize) + 0.5;
 
-					return "EU" + Math.Round(euSize, 1).ToString();
+					return "EU " + Math.Round(euSize, 1).ToString();
 				}
 				else if(gender == Gender.Male)
 				{
@@ -104,7 +104,7 @@ namespace FormsPrototype.Models
 					else
 						euSize = Math.Floor(euSize) + 0.5;
 
-					return "EU" + Math.Round(euSize, 1).ToString();
+					return "EU " + Math.Round(euSize, 1).ToString();
 				}
 
 				return string.Empty;
@@ -126,7 +126,7 @@ namespace FormsPrototype.Models
 					else
 						asianSize = Math.Floor(asianSize) + 0.5;
 
-					return "Asia" + Math.Round(asianSize, 1).ToString();
+					return "Asia " + Math.Round(asianSize, 1).ToString();
 				}
 				else if(gender == Gender.Male)
 				{
@@ -142,7 +142,7 @@ namespace FormsPrototype.Models
 					else
 						asianSize = Math.Floor(asianSize) + 0.5;
 
-					return "Asia" + Math.Round(asianSize, 1).ToString();
+					return "Asia " + Math.Round(asianSize, 1).ToString();
 				}
 
 				return string.Empty;
