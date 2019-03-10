@@ -38,6 +38,7 @@
 	
 		<Label FontSize="Small" Text="Related clothing:"/>
 
+		<!-- Bad horizontal list view
 		<AbsoluteLayout x:Name="MessagesLayoutFrame" Padding="0" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
 			<ContentView x:Name="MessagesLayoutFrameInner"  Padding="0"  HorizontalOptions="StartAndExpand">
 				<ListView x:Name="MessagesListView"
@@ -74,6 +75,7 @@
 				</ListView>
 			</ContentView>
 		</AbsoluteLayout>
+		-->
 		
 		<!-- Add this so that the layout does not expand to the end of screen-->
 		<BoxView HorizontalOptions="FillAndExpand" HeightRequest="5"/>
