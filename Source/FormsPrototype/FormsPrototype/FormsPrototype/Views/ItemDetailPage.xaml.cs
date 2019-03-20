@@ -47,10 +47,14 @@ namespace FormsPrototype.Views
 
 			//Initialize this programmatically as XAML does not work for some reason
 			relatedItemsListView = new HorizontalListView();
-			relatedItemsListView.ItemsSource = viewModel.RelatedItems;
+			SetBinding(HorizontalListView.ItemsSourceProperty, new Binding("RelatedItems"));
 			relatedItemsListView.IsVisible = true;
 			relatedItemsListView.ItemWidth = 144;
 			relatedItemsListView.ItemHeight = 144;
+			relatedItemsListView.SnapStyle = Sharpnado.Presentation.Forms.RenderedViews.SnapStyle.Center;
+			relatedItemsListView.CollectionPadding = 8;
+			relatedItemsListView.VisibleCellCount = 3;
+			relatedItemsListView.Margin = new Thickness(0);
 
 			#region ItemTemplate
 

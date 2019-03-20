@@ -27,13 +27,25 @@
                  IsPullToRefreshEnabled="true"
                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                  CachingStrategy="RecycleElement"
-                 ItemSelected="OnItemSelected">
+                 ItemSelected="OnItemSelected"
+				 SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-							<views:ItemView>
+							<StackLayout Padding="10">
+								<Label Text="{Binding Name}" 
+                       LineBreakMode="NoWrap" 
+                       Style="{DynamicResource ListItemTextStyle}" 
+                       FontSize="16"
+				   HorizontalOptions="Center"/>
+								<Label Text="{Binding Description}" 
+                       LineBreakMode="NoWrap"
+                       Style="{DynamicResource ListItemDetailTextStyle}"
+                       FontSize="13"
+				   HorizontalOptions="Center"/>
 
-							</views:ItemView>
+								<BoxView BackgroundColor="Gray" HeightRequest="200" Margin="50, 0"/>
+							</StackLayout>
 						</ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

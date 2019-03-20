@@ -2,18 +2,20 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FormsPrototype.Views.ItemView">
-  <ContentView.Content>
-		<StackLayout>
-			<StackLayout Padding="10">
-					<Label Text="{Binding Name}" 
+	<ContentView.Content>
+		<StackLayout Padding="10">
+			<Label Text="{Binding Name}" 
                        LineBreakMode="NoWrap" 
                        Style="{DynamicResource ListItemTextStyle}" 
-                       FontSize="16" />
-					<Label Text="{Binding Description}" 
+                       FontSize="16"
+				   HorizontalOptions="Center"/>
+			<Label Text="{Binding Description}" 
                        LineBreakMode="NoWrap"
                        Style="{DynamicResource ListItemDetailTextStyle}"
-                       FontSize="13" />
-				</StackLayout>
+                       FontSize="13"
+				   HorizontalOptions="Center"/>
+
+			<BoxView BackgroundColor="Gray" HeightRequest="200" Margin="50, 0"/>
 		</StackLayout>
-  </ContentView.Content>
+	</ContentView.Content>
 </ContentView>

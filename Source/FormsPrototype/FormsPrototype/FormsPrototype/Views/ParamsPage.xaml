@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormsPrototype.Views.ParamsPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="20">
+			<StackLayout Orientation="Horizontal" Spacing="10" Padding="0">
+				<Label Text="Height:"/>
+				<Entry Text="Sample Height"/>
+				<BoxView/>
+			</StackLayout>
+			<StackLayout Orientation="Vertical">
+				<Label Text="Width:"/>
+			</StackLayout>
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>
