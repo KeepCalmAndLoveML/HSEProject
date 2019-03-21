@@ -4,64 +4,71 @@
              x:Class="FormsPrototype.Views.ItemDetailPage"
              Title="{Binding Title}">
 	<ScrollView Padding="0">
-			<StackLayout x:Name="MainLayout" Spacing="5" Padding="15">
-				<Label Text="{Binding Item.Name}" FontSize="Large" HorizontalOptions="Center" Margin="25"/>
+		<StackLayout x:Name="MainLayout" Spacing="5" Padding="15">
+			<Label Text="{Binding Item.Name}" FontSize="Large" HorizontalOptions="Center" Margin="25"/>
 
-				<!--Replace this by an image-->
-				<BoxView BackgroundColor="DarkGray" MinimumHeightRequest="40" HeightRequest="140" Margin="0, 0, 0, 25"/>
+			<!--Replace this by an image-->
+			<BoxView BackgroundColor="DarkGray" MinimumHeightRequest="40" HeightRequest="140" Margin="0, 0, 0, 25"/>
 
-				<!-- Description is questionable for clothes and shoes
+			<!-- Description is questionable for clothes and shoes
 				<Label Text="Description:" FontSize="Medium" />
 				<Label Text="{Binding Item.Description}" FontSize="Small"/>
 				-->
-				<StackLayout Spacing="30" Padding="0" Orientation="Horizontal" Margin="0, 0, 0, 5">
-					<StackLayout.Resources>
-						<Style x:Key="LabelStyle" TargetType="Label">
-							<Setter Property="FontSize" Value="Medium"/>
-							<Setter Property="LineBreakMode" Value="WordWrap"/>
-						</Style>
-					</StackLayout.Resources>
+			<StackLayout Spacing="30" Padding="0" Orientation="Horizontal" Margin="0, 0, 0, 5">
+				<StackLayout.Resources>
+					<Style x:Key="LabelStyle" TargetType="Label">
+						<Setter Property="FontSize" Value="Medium"/>
+						<Setter Property="LineBreakMode" Value="WordWrap"/>
+					</Style>
+				</StackLayout.Resources>
 
-					<Label Style="{StaticResource Key=LabelStyle}">
-						<Label.FormattedText>
-							<FormattedString>
-								<Span Text="Recommended size ("/>
-								<Span Text="{Binding Item.GenderString}"/>
-								<Span Text="):"/>
-							</FormattedString>
-						</Label.FormattedText>
-					</Label>
-					<Label Text="{Binding Item.ShoeSizeUS}" Style="{StaticResource Key=LabelStyle}"/>
-					<Label Text="{Binding Item.ShoeSizeEU}" Style="{StaticResource Key=LabelStyle}"/>
-					<Label Text="{Binding Item.ShoeSizeAsia}" Style="{StaticResource Key=LabelStyle}"/>
-				</StackLayout>
+				<Label Style="{StaticResource Key=LabelStyle}">
+					<Label.FormattedText>
+						<FormattedString>
+							<Span Text="Recommended size ("/>
+							<Span Text="{Binding Item.GenderString}"/>
+							<Span Text="):"/>
+						</FormattedString>
+					</Label.FormattedText>
+				</Label>
+				<Label Text="{Binding Item.ShoeSizeUS}" Style="{StaticResource Key=LabelStyle}"/>
+				<Label Text="{Binding Item.ShoeSizeEU}" Style="{StaticResource Key=LabelStyle}"/>
+				<Label Text="{Binding Item.ShoeSizeAsia}" Style="{StaticResource Key=LabelStyle}"/>
+			</StackLayout>
 
-				<Label FontSize="Small" Text="Related clothing:"/>
+			<Label FontSize="Small" Text="Related clothing:"/>
 
-			<RelativeLayout Margin="0, 15, 0, 0"
-							HeightRequest="200"
-							VerticalOptions="Start">
-				<ListView Rotation="270" ItemsSource="{Binding RelatedItems}" RowHeight="100" SeparatorVisibility="None"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-50}"
-                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=50}"
-                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=250}"
-                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.5}"
-                              CachingStrategy="RecycleElement">
+			<RelativeLayout Margin="0, 65, 0, 0" Padding="0">
+				<RelativeLayout.Resources>
+					<Style TargetType="ListView">
+						<Setter Property="RowHeight">
+							<Setter.Value>
+								<OnPlatform iOS="200" UWP="500"/>
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</RelativeLayout.Resources>
+				<ListView x:Name="RelatedListView" Rotation="270" ItemsSource="{Binding RelatedItems}" SeparatorVisibility="None"
+									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-120}"
+									RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=30}"
+									RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=200}"
+									RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+									CachingStrategy="RecycleElement">
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<ViewCell>
 								<ContentView  Rotation="90" BackgroundColor="Transparent">
 									<StackLayout Padding="10">
 										<Label Text="{Binding Name}" 
-											   LineBreakMode="NoWrap" 
-											   Style="{DynamicResource ListItemTextStyle}" 
-											   FontSize="16"
-											   HorizontalOptions="Center"/>
+							LineBreakMode="NoWrap" 
+							Style="{DynamicResource ListItemTextStyle}" 
+							FontSize="16"
+						HorizontalOptions="Center"/>
 										<Label Text="{Binding Description}" 
-								           LineBreakMode="NoWrap"
-										   Style="{DynamicResource ListItemDetailTextStyle}"
-										   FontSize="13"
-										   HorizontalOptions="Center"/>
+							LineBreakMode="NoWrap"
+							Style="{DynamicResource ListItemDetailTextStyle}"
+							FontSize="13"
+						HorizontalOptions="Center"/>
 
 										<BoxView BackgroundColor="Gray" HeightRequest="200" Margin="50, 0"/>
 									</StackLayout>
@@ -71,7 +78,6 @@
 					</ListView.ItemTemplate>
 				</ListView>
 			</RelativeLayout>
-
 		</StackLayout>
-		</ScrollView>
+	</ScrollView>
 </ContentPage>
