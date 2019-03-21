@@ -1,17 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			  xmlns:skiaSharp="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="FormsPrototype.Views.ParamsPage">
-    <ContentPage.Content>
-        <StackLayout Spacing="20">
-			<StackLayout Orientation="Horizontal" Spacing="10" Padding="0">
-				<Label Text="Height:"/>
-				<Entry Text="Sample Height"/>
-				<BoxView/>
-			</StackLayout>
-			<StackLayout Orientation="Vertical">
-				<Label Text="Width:"/>
-			</StackLayout>
-		</StackLayout>
-    </ContentPage.Content>
+	<ContentPage.Resources>
+		<!--TODO: Find more suitable colors -->
+		<Style TargetType="Label">
+			<Setter Property="FontSize" Value="16" />
+			<Setter Property="TextColor" Value="#333333"/>
+		</Style>
+		<Style TargetType="Entry">
+			<Setter Property="BackgroundColor" Value="#262626" />
+			<Setter Property="HeightRequest" Value="40" />
+			<Setter Property="FontSize" Value="16" />
+			<Setter Property="TextColor" Value="{StaticResource White}" />
+		</Style>
+		<Style TargetType="Button">
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+			<Setter Property="TextColor" Value="#1b1537"/>
+		</Style>
+	</ContentPage.Resources>
+	<ContentPage.Content>
+		<ScrollView Orientation="Vertical" Padding="0">
+			<Frame BackgroundColor="#00AEAE" HasShadow="True" CornerRadius="10" Padding="0">
+				<StackLayout>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<skiaSharp:SKCanvasView x:Name="MainCanvasView" 
+										PaintSurface="MainCanvasViewPaintSurfaceRequested"/>
+						<StackLayout x:Name="MainLayout"
+							  Padding="60, 25, 60, 20"
+                              Orientation="Vertical"
+                              Spacing="2">
+							<StackLayout.Resources>
+								<!-- Used BasedOn=BaseStyle for style inheritance-->
+
+							</StackLayout.Resources>
+
+							<Label Text="Height" Margin="3, 0, 0, 0"/>
+							<Entry Text="Sample Height" Focused="EntryFocused"/>
+
+							<Label Text="Weight" Margin="3, 15, 0, 0"/>
+							<Entry Text="Sample Width" Focused="EntryFocused"/>
+
+							<Button x:Name="FinishButton" Text="Update recommendations" Clicked="FinishButton_Clicked" Margin="0, 35, 0, 0"/>
+						</StackLayout>
+					</Grid>
+				</StackLayout>
+			</Frame>
+		</ScrollView>
+	</ContentPage.Content>
 </ContentPage>

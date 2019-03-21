@@ -43,6 +43,7 @@ namespace FormsPrototype.Animations
 
 			View viewToHighlight = HightLightState.HighlightPath.GetView(formLayout.Children, HightLightState.CurrHighlightedViewId);
 			HightLightState = null;
+
 			HighlightElement(viewToHighlight, skCanvasView, formLayout);
 		}
 

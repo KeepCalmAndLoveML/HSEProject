@@ -1,100 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              x:Class="FormsPrototype.Views.ItemDetailPage"
              Title="{Binding Title}">
-	<StackLayout Spacing="5" Padding="15">
-		<Label Text="{Binding Item.Name}" FontSize="Large" HorizontalOptions="Center" Margin="25"/>
-		
-		<!--Replace this by an image-->
-		<BoxView BackgroundColor="DarkGray" MinimumHeightRequest="40" HeightRequest="140" Margin="0, 0, 0, 25"/>
-		
-		<!-- Description is questionable for clothes and shoes
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" FontSize="Small"/>
-		-->
-		<StackLayout Spacing="30" Padding="0" Orientation="Horizontal" Margin="0, 0, 0, 5">
-			<StackLayout.Resources>
-				<Style x:Key="LabelStyle" TargetType="Label">
-					<Setter Property="FontSize" Value="Medium"/>
-					<Setter Property="LineBreakMode" Value="WordWrap"/>
-				</Style>
-			</StackLayout.Resources>
+	<ScrollView Padding="0">
+			<StackLayout x:Name="MainLayout" Spacing="5" Padding="15">
+				<Label Text="{Binding Item.Name}" FontSize="Large" HorizontalOptions="Center" Margin="25"/>
 
-			<Label Style="{StaticResource Key=LabelStyle}">
-				<Label.FormattedText>
-					<FormattedString>
-						<Span Text="Recommended size ("/>
-						<Span Text="{Binding Item.GenderString}"/>
-						<Span Text="):"/>
-					</FormattedString>
-				</Label.FormattedText>
-			</Label>
-			<Label Text="{Binding Item.ShoeSizeUS}" Style="{StaticResource Key=LabelStyle}"/>
-			<Label Text="{Binding Item.ShoeSizeEU}" Style="{StaticResource Key=LabelStyle}"/>
-			<Label Text="{Binding Item.ShoeSizeAsia}" Style="{StaticResource Key=LabelStyle}"/>
-		</StackLayout>
-	
-		<Label FontSize="Small" Text="Related clothing:"/>
+				<!--Replace this by an image-->
+				<BoxView BackgroundColor="DarkGray" MinimumHeightRequest="40" HeightRequest="140" Margin="0, 0, 0, 25"/>
 
-		<!-- Bad horizontal list view
-		<AbsoluteLayout x:Name="MessagesLayoutFrame" Padding="0" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
-			<ContentView x:Name="MessagesLayoutFrameInner"  Padding="0"  HorizontalOptions="StartAndExpand">
-				<ListView x:Name="MessagesListView"
-              ItemsSource="{Binding RelatedItems}"
-              RowHeight="240"
-              VerticalOptions="CenterAndExpand"
-              HeightRequest="240"
-              WidthRequest="240"
-              Rotation="270"
-              HorizontalOptions="StartAndExpand">
+				<!-- Description is questionable for clothes and shoes
+				<Label Text="Description:" FontSize="Medium" />
+				<Label Text="{Binding Item.Description}" FontSize="Small"/>
+				-->
+				<StackLayout Spacing="30" Padding="0" Orientation="Horizontal" Margin="0, 0, 0, 5">
+					<StackLayout.Resources>
+						<Style x:Key="LabelStyle" TargetType="Label">
+							<Setter Property="FontSize" Value="Medium"/>
+							<Setter Property="LineBreakMode" Value="WordWrap"/>
+						</Style>
+					</StackLayout.Resources>
+
+					<Label Style="{StaticResource Key=LabelStyle}">
+						<Label.FormattedText>
+							<FormattedString>
+								<Span Text="Recommended size ("/>
+								<Span Text="{Binding Item.GenderString}"/>
+								<Span Text="):"/>
+							</FormattedString>
+						</Label.FormattedText>
+					</Label>
+					<Label Text="{Binding Item.ShoeSizeUS}" Style="{StaticResource Key=LabelStyle}"/>
+					<Label Text="{Binding Item.ShoeSizeEU}" Style="{StaticResource Key=LabelStyle}"/>
+					<Label Text="{Binding Item.ShoeSizeAsia}" Style="{StaticResource Key=LabelStyle}"/>
+				</StackLayout>
+
+				<Label FontSize="Small" Text="Related clothing:"/>
+
+			<RelativeLayout Margin="0, 15, 0, 0"
+							HeightRequest="200"
+							VerticalOptions="Start">
+				<ListView Rotation="270" ItemsSource="{Binding RelatedItems}" RowHeight="100" SeparatorVisibility="None"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-50}"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=50}"
+                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=250}"
+                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.5}"
+                              CachingStrategy="RecycleElement">
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<ViewCell>
-								<ContentView Rotation="90" Padding="0, 12">
-									<StackLayout Padding="0, 10">
+								<ContentView  Rotation="90" BackgroundColor="Transparent">
+									<StackLayout Padding="10">
 										<Label Text="{Binding Name}" 
-                       LineBreakMode="NoWrap" 
-                       Style="{DynamicResource ListItemTextStyle}" 
-                       FontSize="16" Margin="40, 0, 0, 0"/>
+											   LineBreakMode="NoWrap" 
+											   Style="{DynamicResource ListItemTextStyle}" 
+											   FontSize="16"
+											   HorizontalOptions="Center"/>
 										<Label Text="{Binding Description}" 
-                       LineBreakMode="NoWrap"
-                       Style="{DynamicResource ListItemDetailTextStyle}"
-                       FontSize="13" Margin="30, 0"/>
-										<BoxView BackgroundColor="Gray"
-												 WidthRequest="200"
-												 HeightRequest="150"
-												 HorizontalOptions="Center"
-												 VerticalOptions="StartAndExpand"/>
+								           LineBreakMode="NoWrap"
+										   Style="{DynamicResource ListItemDetailTextStyle}"
+										   FontSize="13"
+										   HorizontalOptions="Center"/>
+
+										<BoxView BackgroundColor="Gray" HeightRequest="200" Margin="50, 0"/>
 									</StackLayout>
 								</ContentView>
 							</ViewCell>
 						</DataTemplate>
 					</ListView.ItemTemplate>
 				</ListView>
-			</ContentView>
-		</AbsoluteLayout>
-		-->
-		
-		<!-- Add this so that the layout does not expand to the end of screen-->
-		<BoxView HorizontalOptions="FillAndExpand" HeightRequest="5"/>
+			</RelativeLayout>
 
-		<!-- Consider adding this later, as this is a more native approach
-		<renderedViews:HorizontalListView x:Name="ItemsListView" 
-                ItemsSource="{Binding RelatedItems}"
-                ListLayout="Linear" 
-				ItemSpacing="10" SnapStyle="Center" 
-				ItemHeight="100" ItemWidth="100" CollectionPadding="4">
-			
-			<renderedViews:HorizontalListView.ItemTemplate>
-				<DataTemplate>
-					<ViewCell>
-						<Label Text="Test"/>
-					</ViewCell>
-				</DataTemplate>
-			</renderedViews:HorizontalListView.ItemTemplate>
-		</renderedViews:HorizontalListView>
-		-->
-	</StackLayout>
+		</StackLayout>
+		</ScrollView>
 </ContentPage>
