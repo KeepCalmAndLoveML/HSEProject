@@ -10,11 +10,13 @@ using SkiaSharp.Views.Forms;
 
 namespace FormsPrototype.Animations
 {
+	//TODO: Try replacing arcs around buttons by lines (maybe make this a setting?)
 	class HighlightPath
 	{
 		//The highlighter will higlight elements with types that inherit from those in this list
-		public static readonly List<Type> AllowedUITypes = new List<Type>() { typeof(Button), typeof(Entry) };
+		public static readonly List<Type> AllowedUITypes = new List<Type>() { typeof(Button), typeof(Entry), typeof(BoxView), typeof(Image) };
 
+		//StrokeDashMap[Id] -> StrokeDash
 		private readonly Dictionary<int, StrokeDash> StrokeDashMap = new Dictionary<int, StrokeDash>();
 
 		public StrokeDash FirstDash => StrokeDashMap.Values.FirstOrDefault();
@@ -27,13 +29,13 @@ namespace FormsPrototype.Animations
 
 		public StrokeDash GetDashForView(IList<View> layoutChildren, int viewId) => StrokeDashMap[viewId];
 
-		public StrokeDash GetDash(int i) => StrokeDashMap.ElementAt(i).Value;
+		public StrokeDash GetDash(int index) => StrokeDashMap.ElementAt(index).Value;
 
 		public void SetDashForView(IList<View> layoutChildren, View view, StrokeDash strokeDash) => StrokeDashMap[GetViewId(layoutChildren, view)] = strokeDash;
 
 		public int GetViewId(IList<View> layoutChildren, View view) => layoutChildren.IndexOf(view);
 
-		public View GetView(IList<View> layoutChildren, int currHighlightedViewId) => layoutChildren.ElementAt(currHighlightedViewId);
+		public View GetView(IList<View> layoutChildren, int Id) => layoutChildren.ElementAt(Id);
 
 		public static HighlightPath Create(SKCanvasView skCanvasView, IList<View> layoutChildren, double strokeWidth)
 		{
@@ -48,7 +50,7 @@ namespace FormsPrototype.Animations
 
 			foreach(View view in layoutChildren)
 			{
-				int iStrokeDashCount = highlightPath.DashCount;
+				int dashCount = highlightPath.DashCount;
 				Rectangle viewBounds = skCanvasView.FromPixels(view.Bounds);
 
 				if(!AllowedUITypes.Contains(view.GetType()))
@@ -66,9 +68,9 @@ namespace FormsPrototype.Animations
 				float yCurr = path.LastPoint.Y;
 
 				// Add arch for views except first one
-				if(iStrokeDashCount > 0)
+				if(dashCount > 0)
 				{
-					float d = iStrokeDashCount % 2 == 0 ? -1 : 1;
+					float d = dashCount % 2 == 0 ? -1 : 1;
 					float arcHeight = (float)viewBounds.Y + (float)viewBounds.Height - path.LastPoint.Y + (float)strokeWidth / 2;
 					path.ArcTo(new SKRect(xCurr - arcHeight / 2, yCurr, xCurr + arcHeight / 2, yCurr + arcHeight), -90, 180 * d, false);
 				}
@@ -77,16 +79,16 @@ namespace FormsPrototype.Animations
 
 				// Add line below the view
 				// If it's not the first view, the start point is the end from arc end point 
-				//  and line direction is either to view start or view end
-				path.LineTo((float)viewBounds.X + (float)viewBounds.Width * ( iStrokeDashCount % 2 == 0 ? 1 : 0 ), path.LastPoint.Y);
+				// and line direction is either to view start or view end
+				path.LineTo((float)viewBounds.X + (float)viewBounds.Width * ( dashCount % 2 == 0 ? 1 : 0 ), path.LastPoint.Y);
 
-				if(view is Button)
+				if(view is Button || view is BoxView)
 				{
 					xCurr = path.LastPoint.X;
 					yCurr = path.LastPoint.Y;
 
 					// Draw arc from below button to above button
-					float d = iStrokeDashCount % 2 == 0 ? -1 : 1;
+					float d = dashCount % 2 == 0 ? -1 : 1;
 					float arcHeight = (float)viewBounds.Height + (float)strokeWidth;
 					path.ArcTo(new SKRect(xCurr - arcHeight / 2, yCurr - arcHeight, xCurr + arcHeight / 2, yCurr), 90, 180 * d, false);
 

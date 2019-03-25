@@ -48,7 +48,7 @@
 						</Setter>
 					</Style>
 				</RelativeLayout.Resources>
-				<ListView x:Name="RelatedListView" Rotation="270" ItemsSource="{Binding RelatedItems}" SeparatorVisibility="None"
+				<ListView x:Name="RelatedListView" Rotation="270" ItemsSource="{Binding RelatedItems}" SeparatorVisibility="None" RowHeight="200"
 									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-120}"
 									RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=30}"
 									RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=200}"

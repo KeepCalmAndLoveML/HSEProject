@@ -27,14 +27,9 @@ namespace FormsPrototype.Views
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			var item = args.SelectedItem as Item;
-			if(item == null)
-				return;
-
-			await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
-
-			// Manually deselect item.
-			ItemsListView.SelectedItem = null;
+			Item selected;
+			if(ItemsListView.TryGetSelectedItem<Item>(args, out selected))
+				await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(selected)));
 		}
 
 		protected override void OnAppearing()

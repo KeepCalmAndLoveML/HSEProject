@@ -10,13 +10,23 @@ using Xamarin.Forms.Xaml;
 using FormsPrototype.Animations;
 using SkiaSharp.Views.Forms;
 
+using FormsPrototype.Models;
+
 namespace FormsPrototype.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ParamsPage : ContentPage
 	{
+		//Put settings here so they are easier to change in the future
+		public readonly static Color GradientStart = Color.FromHex("#FF4600");
+		public readonly static Color GradientEnd = Color.FromHex("#CC00AF");
+		public readonly static TimeSpan StrokeAnimationDuration = TimeSpan.FromMilliseconds(900);
+		public readonly static Easing StrokeAnimationEasing = Easing.CubicInOut;
+
 		private readonly HighlightForm Highlighter;
-		
+
+		private readonly List<ChooseEyeOption> EyeOptions;
+
 		public ParamsPage()
 		{
 			InitializeComponent();
@@ -26,12 +36,25 @@ namespace FormsPrototype.Views
 				new HighlightSettings()
 				{
 					StrokeWidth = 6,
-					StrokeStartColor = Color.FromHex("#FF4600"),
-					StrokeEndColor = Color.FromHex("#CC00AF"),
-					AnimationDuration = TimeSpan.FromMilliseconds(900),
-					AnimationEasing = Easing.CubicInOut,
+					StrokeStartColor = GradientStart,
+					StrokeEndColor = GradientEnd,
+					AnimationDuration = StrokeAnimationDuration,
+					AnimationEasing = StrokeAnimationEasing,
 				}
-			);	
+			);
+
+			EyeOptions = new List<ChooseEyeOption>()
+			{
+				new ChooseEyeOption { Name="Blue eyes", Description="Gorgeous"},
+				new ChooseEyeOption { Name="Green eyes", Description="Astonishing"},
+				new ChooseEyeOption { Name="Yellow eyes", Description="What?! Do they really exit?" },
+				new ChooseEyeOption { Name="Black eyes", Description="Miraculous"},
+				new ChooseEyeOption { Name="Gray eyes", Description="Like gandalf"},
+				new ChooseEyeOption { Name="ААТ ВИН ТАА", Description="DUDE I LOVE IT"}
+			};
+
+
+			EyesListView.ItemsSource = EyeOptions;
 		}
 
 		private void HighlightElement(View sender)
@@ -40,6 +63,11 @@ namespace FormsPrototype.Views
 		}
 
 		private void EntryFocused(object sender, FocusEventArgs e)
+		{
+			HighlightElement((View)sender);
+		}
+
+		private void BoxViewFocused(object sender, FocusEventArgs e)
 		{
 			HighlightElement((View)sender);
 		}
@@ -52,6 +80,7 @@ namespace FormsPrototype.Views
 		private void FinishButton_Clicked(object sender, EventArgs e)
 		{
 			//Do some math stuff to calculate recommendations
+
 			HighlightElement((View)sender);
 		}
 	}

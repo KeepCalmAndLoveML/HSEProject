@@ -38,10 +38,12 @@ namespace FormsPrototype.ViewModels
 			backingStore = value;
 			onChanged?.Invoke();
 			OnPropertyChanged(propertyName);
+
 			return true;
 		}
 
 		#region INotifyPropertyChanged
+
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
 		{
@@ -51,6 +53,7 @@ namespace FormsPrototype.ViewModels
 
 			changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+
 		#endregion
 	}
 }

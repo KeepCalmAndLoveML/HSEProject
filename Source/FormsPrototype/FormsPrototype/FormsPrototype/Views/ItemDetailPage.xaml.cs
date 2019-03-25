@@ -41,6 +41,15 @@ namespace FormsPrototype.Views
 		private void Initialize()
 		{
 			BindingContext = viewModel;
+
+			RelatedListView.ItemSelected += RelatedListView_ItemSelected;
+		}
+
+		private async void RelatedListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			Item selected;
+			if(RelatedListView.TryGetSelectedItem<Item>(e, out selected))
+				await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(selected)));
 		}
 	}
 }
