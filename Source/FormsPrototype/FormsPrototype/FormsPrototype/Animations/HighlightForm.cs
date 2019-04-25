@@ -64,6 +64,7 @@ namespace FormsPrototype.Animations
 
 			int currHighlightViewId = HightLightState.CurrHighlightedViewId;
 			int iViewIdToHighlight = highlightPath.GetViewId(layoutChildren, viewToHighlight);
+
 			if(currHighlightViewId == iViewIdToHighlight)
 				return;
 
