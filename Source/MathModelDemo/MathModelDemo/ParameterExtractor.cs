@@ -8,8 +8,10 @@ namespace MathModelDemo
 {
 	public interface IParameterExtractor
 	{
-		int ParamsCount { get; set; }
+		int ParamsCount { get; }
 
-		bool TryGetValue(int index, out object result);	
+		bool TryGetValue(int index, out object result);
+
+		bool TryLoadParams();
 	}
 }

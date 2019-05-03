@@ -80,6 +80,7 @@ namespace MathModelDemo
 			{
 				int last = 0;
 				double iPred = functionResults.Sum(x => x[iClothing] * ParamWeights[last++]);
+				iPred = iPred / ParamWeights.Sum();
 
 				Predictions.Add(iPred);
 			}
