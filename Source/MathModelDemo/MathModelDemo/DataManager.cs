@@ -159,5 +159,12 @@ namespace MathModelDemo
 				DataType = type;
 			}
 		}
+
+		public struct DataElement
+		{
+			public IReadOnlyDictionary<string, string> AttributeValues;
+
+			public string Name { get; set; }
+		}
 	}
 }
