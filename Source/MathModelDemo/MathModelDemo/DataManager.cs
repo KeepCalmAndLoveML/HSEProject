@@ -165,6 +165,12 @@ namespace MathModelDemo
 			public IReadOnlyDictionary<string, string> AttributeValues;
 
 			public string Name { get; set; }
+
+			public DataElement(string name, IReadOnlyDictionary attributes)
+			{
+				Name = name;
+				AttributeValues = attributes;
+			}
 		}
 	}
 }
