@@ -11,6 +11,7 @@ using FormsPrototype.Animations;
 using SkiaSharp.Views.Forms;
 
 using FormsPrototype.Models;
+using FormsPrototype.ViewModels;
 
 namespace FormsPrototype.Views
 {
@@ -25,10 +26,12 @@ namespace FormsPrototype.Views
 
 		private readonly HighlightForm Highlighter;
 
-		private readonly List<ChooseEyeOption> EyeOptions;
+		private ParamsViewModel ViewModel;
 
 		public ParamsPage()
 		{
+			ViewModel = new ParamsViewModel();
+			this.BindingContext = ViewModel;
 			InitializeComponent();
 
 			Highlighter = new HighlightForm
@@ -42,20 +45,15 @@ namespace FormsPrototype.Views
 					AnimationEasing = StrokeAnimationEasing,
 				}
 			);
-
-			EyeOptions = new List<ChooseEyeOption>()
-			{
-				new ChooseEyeOption { Name="Blue eyes", Description="Gorgeous"},
-				new ChooseEyeOption { Name="Green eyes", Description="Astonishing"},
-				new ChooseEyeOption { Name="Yellow eyes", Description="What?! Do they really exit?" },
-				new ChooseEyeOption { Name="Black eyes", Description="Miraculous"},
-				new ChooseEyeOption { Name="Gray eyes", Description="Like gandalf"},
-				new ChooseEyeOption { Name="ААТ ВИН ТАА", Description="DUDE I LOVE IT"}
-			};
-
-
-			EyesListView.ItemsSource = EyeOptions;
 		}
+
+		public ParamsPage(ParamsViewModel viewModel) : this()
+		{
+			ViewModel = viewModel;
+			this.BindingContext = ViewModel;
+		}
+
+		#region Animations
 
 		private void HighlightElement(View sender)
 		{
@@ -77,11 +75,15 @@ namespace FormsPrototype.Views
 			Highlighter.Draw(MainCanvasView, e.Surface.Canvas);
 		}
 
+		#endregion
+
 		private void FinishButton_Clicked(object sender, EventArgs e)
 		{
 			//Do some math stuff to calculate recommendations
 
 			HighlightElement((View)sender);
 		}
+
+
 	}
 }

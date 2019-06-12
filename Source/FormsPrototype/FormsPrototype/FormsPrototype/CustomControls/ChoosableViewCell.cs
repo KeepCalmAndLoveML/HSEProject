@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 namespace FormsPrototype.CustomControls
 {
+	//Deprecated. See notes for 12.06.2019
 	//Describes a view cell that will highlight when chosen
 	public class ChoosableViewCell : ViewCell
 	{

@@ -16,9 +16,10 @@ namespace FormsPrototype.UWP.CustomRenderers
 {
 	public class ChoosableCellRenderer : ViewCellRenderer
 	{
-		//TODO: 
+		//TODO: Create a data template in xaml
 		public override Windows.UI.Xaml.DataTemplate GetTemplate(Cell cell)
 		{
+			
 			return base.GetTemplate(cell);
 		}
 	}

@@ -45,6 +45,15 @@ namespace MathModelDemo
 
 		public static Task<bool> TryComputePredictions() => Task.Run(() => Model.TryComputePredictions(Extractor, out LastModelPredictions));
 
+		public static Task<bool> TrySavePredictions() => Task.Run(() =>
+	    {
+			if(LastModelPredictions == null)
+				return false;
+
+
+			return true;
+	    });
+
 		private class ParameterExtractor : IParameterExtractor
 		{
 			public int ParamsCount { get; private set; } = 4;

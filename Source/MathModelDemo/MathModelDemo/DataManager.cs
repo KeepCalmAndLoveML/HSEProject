@@ -36,7 +36,7 @@ namespace MathModelDemo
 			IsDocumentLoading = false;
 			return result;
 		}
-
+		
 		public static List<string> GetValue(Queue<DataPathElement> query)
 		{
 			if(!IsDocumentLoaded)
@@ -128,9 +128,64 @@ namespace MathModelDemo
 			return res;
 		}
 
+		public static void SetValue(Queue<DataPathElement> query, string value)
+		{
+			if(!IsDocumentLoaded)
+				throw new InvalidOperationException("Data was not loaded");
+
+			XElement child = LastDocument.Root;
+			List<XElement> children = null;
+			while(query.Count > 0)
+			{
+				DataPathElement next = query.Dequeue();
+
+				switch(next.DataType)
+				{
+					case DataType.Children:
+						if(child == null)
+							throw new NotImplementedException("Getting 2D children array is not implemented");
+						
+						children = child.Elements(next.Key).ToList();
+						child = null;
+						break;
+					case DataType.Child:
+						if(child == null)
+							children = children.Select(x => x.Element(next.Key)).ToList();
+						else if(children == null)
+						{
+							//This statement is for when the document only has one collection of elements
+							//So the root of the document automatically becomes the root of this collection
+							//Which breaks the query
+							if(next.Key != child.Name)
+								child = child.Element(next.Key);
+						}
+						break;
+					
+					case DataType.Value:
+						if(child == null)
+							children.ForEach(x => x.SetValue(value));
+						else
+							child.SetValue(value);
+						break;
+					case DataType.Attribute:
+						if(child == null)
+							children.ForEach(x => x.Attribute(next.Key).SetValue(value));
+						else
+							child.Attribute(next.Key).SetValue(value);
+						break;
+					default:
+						throw new NotImplementedException($"Datatype {next.DataType} not implemented");
+				}
+
+				if(child == null && children == null)
+					throw new InvalidOperationException("Invalid query");
+			}
+		}
 
 		public static Task<bool> TryReloadXml() => Task.Run(() => LoadDocument());
-		
+
+		public static Task SaveXml() => Task.Run(() => LastDocument.Save(Program.PathToXml));
+
 		public enum DataType
 		{
 			Child,
@@ -157,19 +212,6 @@ namespace MathModelDemo
 					Key = k;
 
 				DataType = type;
-			}
-		}
-
-		public struct DataElement
-		{
-			public IReadOnlyDictionary<string, string> AttributeValues;
-
-			public string Name { get; set; }
-
-			public DataElement(string name, IReadOnlyDictionary attributes)
-			{
-				Name = name;
-				AttributeValues = attributes;
 			}
 		}
 	}
