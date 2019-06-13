@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FormsPrototype.Views.ItemsPage"
 			 xmlns:views="clr-namespace:FormsPrototype.Views"
+			 xmlns:local="clr-namespace:FormsPrototype;assembly=FormsPrototype"
+			 xmlns:images="clr-namespace:FormsPrototype.Images"
               Title="{Binding Title}"
              x:Name="BrowseItemsPage">
 	
@@ -17,9 +19,14 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 	-->
-    <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="ItemsListView" 
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<images:EmbeddedImageConverter x:Key="ImageConverter"/>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<ContentPage.Content>
+		<StackLayout x:Name="MainLayout">
+			<ListView x:Name="ItemsListView" 
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
                  HasUnevenRows="true"
@@ -44,7 +51,9 @@
                        FontSize="13"
 				   HorizontalOptions="Center"/>
 
-								<BoxView BackgroundColor="Gray" HeightRequest="200" Margin="50, 0"/>
+								<!--<BoxView BackgroundColor="Gray" HeightRequest="100" Margin="50, 0"/> -->
+								<Image HeightRequest="128" Margin="50, 0" HorizontalOptions="Center"
+									   Aspect="AspectFill" Source="{Binding RessourceName, Converter={StaticResource ImageConverter}}"/>
 							</StackLayout>
 						</ViewCell>
                     </DataTemplate>

@@ -14,6 +14,9 @@ namespace FormsPrototype.Models
 	{
 		//Unique Id
 		public string Id { get; set; }
+
+		//Maybe use this as an Id? 
+		public string RessourceName { get; set; }
 		
 		public string Name { get; set; }
 		public string Description { get; set; }

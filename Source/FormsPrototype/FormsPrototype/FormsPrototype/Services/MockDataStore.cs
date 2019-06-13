@@ -21,7 +21,8 @@ namespace FormsPrototype.Services
 					Name = "Nike air max x96 aaa",
 					Description = "Just put them on your feet",
 					ShoeSize = 260,
-					Gender = Gender.Male
+					Gender = Gender.Male,
+					RessourceName = "shoes_one.png".ToImageRessourceId()
 				},
 				new Item
 				{
@@ -29,7 +30,8 @@ namespace FormsPrototype.Services
 					Name = "Adidas ultraboost x123",
 					Description ="Soooooooo comfortable",
 					ShoeSize = 240,
-					Gender = Gender.Female
+					Gender = Gender.Female,
+					RessourceName = "shoes_one.png".ToImageRessourceId()
 				},
 				new Item
 				{
@@ -37,7 +39,8 @@ namespace FormsPrototype.Services
 					Name = "Some Reebook shit",
 					Description ="The coolest thing on the market",
 					ShoeSize = 275,
-					Gender = Gender.Male
+					Gender = Gender.Male,
+					RessourceName = "shoes_one.png".ToImageRessourceId()
 				}
 			};
 

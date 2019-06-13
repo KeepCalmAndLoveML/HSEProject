@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 using Xamarin.Forms;
 using SkiaSharp.Views.Forms;
@@ -34,6 +36,23 @@ namespace FormsPrototype
 			// Manually deselect item.
 			ls.SelectedItem = null;
 			return true;
+		}
+	}
+
+	public static class SimpleExtensions
+	{
+		private static string[] Ressources = typeof(SimpleExtensions).Assembly.GetManifestResourceNames();
+
+		public static string ToImageRessourceId(this string filename)
+		{
+			//Those checks might be slow, redundant and unnecessary...
+			//But this ressource thing seems scary not throwing exceptions, so I might as well leave them here
+			if (Path.GetExtension(filename) != ".png")
+				throw new ArgumentException("Are you sure you want to use non png files?");
+			if(Ressources.Where(x => x.Contains(filename)).Count() == 0)
+				throw new ArgumentException("Invalid ressource name");
+
+			return $"{typeof(SimpleExtensions).Assembly.GetName().Name}.Images.{filename}";
 		}
 	}
 }
