@@ -9,6 +9,7 @@ using SkiaSharp.Views.Forms;
 
 namespace FormsPrototype
 {
+	// Extensions for SkiaSharp
 	public static class SkiaSharpTools
 	{
 		public static Rectangle FromPixels(this SKCanvasView skCanvasView, Rectangle rc) =>
@@ -25,6 +26,7 @@ namespace FormsPrototype
 		}
 	}
 
+	//Extensions for Xamarin.Forms controls
 	public static class UIExtensions
 	{
 		public static bool TryGetSelectedItem<T>(this ListView ls, SelectedItemChangedEventArgs eventArgs, out T result) where T : class
@@ -39,6 +41,7 @@ namespace FormsPrototype
 		}
 	}
 
+	//Extensions for basic C# classes 
 	public static class SimpleExtensions
 	{
 		private static string[] Ressources = typeof(SimpleExtensions).Assembly.GetManifestResourceNames();
