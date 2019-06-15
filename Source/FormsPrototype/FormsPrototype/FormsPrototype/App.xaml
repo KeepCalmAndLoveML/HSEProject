@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			  xmlns:images="clr-namespace:FormsPrototype.Images"
              x:Class="FormsPrototype.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +13,8 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
-        </ResourceDictionary>
+
+			<images:EmbeddedImageConverter x:Key="ImageConverter"/>
+		</ResourceDictionary>
     </Application.Resources>
 </Application>

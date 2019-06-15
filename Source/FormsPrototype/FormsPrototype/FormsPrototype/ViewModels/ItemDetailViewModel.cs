@@ -14,7 +14,7 @@ namespace FormsPrototype.ViewModels
 		{
 			Title = item?.Name;
 			Item = item;
-
+			
 			//TODO: This should get the items from the data store
 			RelatedItems = new List<Item>()
 			{

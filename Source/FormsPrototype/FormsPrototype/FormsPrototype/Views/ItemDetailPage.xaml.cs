@@ -12,37 +12,32 @@ namespace FormsPrototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ItemDetailPage : ContentPage
 	{
-		ItemDetailViewModel viewModel;
+		ItemDetailViewModel ViewModel;
 
-		public ItemDetailPage(ItemDetailViewModel viewModel)
+		public ItemDetailPage(ItemDetailViewModel viewModel = null)
 		{
 			InitializeComponent();
 
-			this.viewModel = viewModel;
-			Initialize();
-		}
-
-		public ItemDetailPage()
-		{
-			InitializeComponent();
-
-			var item = new Item
+			if(viewModel != null)
+				ViewModel = viewModel;
+			else
 			{
-				Name = "Shoes",
-				Description = "This is an item description.",
-				ShoeSize = 260,
-				Gender = Gender.Male
-			};
+				var item = new Item
+				{
+					Name = "Shoes",
+					Description = "This is an item description.",
+					ShoeSize = 260,
+					Gender = Gender.Male
+				};
 
-			viewModel = new ItemDetailViewModel(item);
-			Initialize();		
-		}
-		
-		private void Initialize()
-		{
-			BindingContext = viewModel;
+				ViewModel = new ItemDetailViewModel(item);
+			}
+			BindingContext = ViewModel;
 
 			RelatedListView.ItemSelected += RelatedListView_ItemSelected;
+
+			//TODO: This should be in the xaml, but doesn't work there
+			DetailImage.Source = ImageSource.FromResource(ViewModel.Item.RessourceIdDetail);
 		}
 
 		private async void RelatedListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

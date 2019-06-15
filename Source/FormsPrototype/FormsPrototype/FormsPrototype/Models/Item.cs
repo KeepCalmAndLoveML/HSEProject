@@ -16,8 +16,9 @@ namespace FormsPrototype.Models
 		public string Id { get; set; }
 
 		//Maybe use this as an Id? 
-		public string RessourceName { get; set; }
-		
+		public string RessourceIdSmall { get; set; }
+		public string RessourceIdDetail { get; set; }
+
 		public string Name { get; set; }
 		public string Description { get; set; }
 

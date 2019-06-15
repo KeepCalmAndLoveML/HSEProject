@@ -19,11 +19,6 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 	-->
-	<ContentPage.Resources>
-		<ResourceDictionary>
-			<images:EmbeddedImageConverter x:Key="ImageConverter"/>
-		</ResourceDictionary>
-	</ContentPage.Resources>
 	<ContentPage.Content>
 		<StackLayout x:Name="MainLayout">
 			<ListView x:Name="ItemsListView" 
@@ -53,7 +48,7 @@
 
 								<!--<BoxView BackgroundColor="Gray" HeightRequest="100" Margin="50, 0"/> -->
 								<Image HeightRequest="128" Margin="50, 0" HorizontalOptions="Center"
-									   Aspect="AspectFill" Source="{Binding RessourceName, Converter={StaticResource ImageConverter}}"/>
+									   Aspect="AspectFill" Source="{Binding RessourceIdSmall, Converter={StaticResource ImageConverter}}"/>
 							</StackLayout>
 						</ViewCell>
                     </DataTemplate>
