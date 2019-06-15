@@ -30,9 +30,10 @@ namespace FormsPrototype.Views
 
 		public ParamsPage()
 		{
+			InitializeComponent();
+
 			ViewModel = new ParamsViewModel();
 			this.BindingContext = ViewModel;
-			InitializeComponent();
 
 			Highlighter = new HighlightForm
 			(

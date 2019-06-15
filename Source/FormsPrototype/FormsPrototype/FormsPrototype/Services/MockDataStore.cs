@@ -22,7 +22,8 @@ namespace FormsPrototype.Services
 					Description = "Just put them on your feet",
 					ShoeSize = 260,
 					Gender = Gender.Male,
-					RessourceName = "shoes_one.png".ToImageRessourceId()
+					RessourceIdSmall = "shoes_one.png".ToImageRessourceId(),
+					RessourceIdDetail = "shoes_two.jpg".ToImageRessourceId()
 				},
 				new Item
 				{
@@ -31,7 +32,8 @@ namespace FormsPrototype.Services
 					Description ="Soooooooo comfortable",
 					ShoeSize = 240,
 					Gender = Gender.Female,
-					RessourceName = "shoes_one.png".ToImageRessourceId()
+					RessourceIdSmall = "shoes_one.png".ToImageRessourceId(),
+					RessourceIdDetail = "shoes_two.jpg".ToImageRessourceId()
 				},
 				new Item
 				{
@@ -40,14 +42,12 @@ namespace FormsPrototype.Services
 					Description ="The coolest thing on the market",
 					ShoeSize = 275,
 					Gender = Gender.Male,
-					RessourceName = "shoes_one.png".ToImageRessourceId()
+					RessourceIdSmall = "shoes_one.png".ToImageRessourceId(),
+					RessourceIdDetail = "shoes_two.jpg".ToImageRessourceId()
 				}
 			};
 
-			foreach(var item in mockItems)
-			{
-				items.Add(item);
-			}
+			items.AddRange(mockItems);
 		}
 
 		public async Task<bool> AddItemAsync(Item item)

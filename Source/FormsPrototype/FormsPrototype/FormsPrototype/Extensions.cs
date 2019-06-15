@@ -41,14 +41,16 @@ namespace FormsPrototype
 
 	public static class SimpleExtensions
 	{
-		private static string[] Ressources = typeof(SimpleExtensions).Assembly.GetManifestResourceNames();
-
+		public static string[] Ressources = typeof(SimpleExtensions).Assembly.GetManifestResourceNames();
+		
 		public static string ToImageRessourceId(this string filename)
 		{
 			//Those checks might be slow, redundant and unnecessary...
 			//But this ressource thing seems scary not throwing exceptions, so I might as well leave them here
-			if (Path.GetExtension(filename) != ".png")
-				throw new ArgumentException("Are you sure you want to use non png files?");
+
+			//I decided jpg might also be nice for memory saving.
+			//if (Path.GetExtension(filename) != "png")
+				//throw new ArgumentException("Are you sure you want to use non png files?");
 			if(Ressources.Where(x => x.Contains(filename)).Count() == 0)
 				throw new ArgumentException("Invalid ressource name");
 
