@@ -6,6 +6,8 @@ using Xamarin.Forms.Xaml;
 using FormsPrototype.Models;
 using FormsPrototype.ViewModels;
 
+using FormsPrototype.Services;
+
 
 namespace FormsPrototype.Views
 {

@@ -48,78 +48,85 @@
 
 							<Label Text="Weight" Margin="3, 15, 0, 0"/>
 							<Entry Text="Sample Width" Focused="EntryFocused"/>
-							
-							<!-- Horizontal List View -->
-							<RelativeLayout Margin="0, 45, 0, 0" Padding="0" BackgroundColor="Transparent">
-								<RelativeLayout.Resources>
-									<Style TargetType="ListView">
-										<Setter Property="RowHeight">
-											<Setter.Value>
-												<OnPlatform iOS="150" UWP="300"/>
-											</Setter.Value>
-										</Setter>
-										<Setter Property="WidthRequest">
-											<Setter.Value>
-												<OnPlatform iOS="250" UWP="450"/>
-											</Setter.Value>
-										</Setter>
-									</Style>
-								</RelativeLayout.Resources>
-								<custom:ClickableListView x:Name="EyesListView" Rotation="270" ItemsSource="{Binding EyeOptions}" SeparatorVisibility="None" RowHeight="150"
+
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="150"/>
+									<RowDefinition Height="150"/>
+								</Grid.RowDefinitions>
+								<!-- Horizontal List View -->
+								<StackLayout Padding="0" Grid.Row="0">
+									<RelativeLayout Margin="0, 45, 0, 0" Padding="0" BackgroundColor="Transparent">
+										<RelativeLayout.Resources>
+											<Style TargetType="ListView">
+												<Setter Property="RowHeight">
+													<Setter.Value>
+														<OnPlatform iOS="150" UWP="300"/>
+													</Setter.Value>
+												</Setter>
+												<Setter Property="WidthRequest">
+													<Setter.Value>
+														<OnPlatform iOS="250" UWP="450"/>
+													</Setter.Value>
+												</Setter>
+											</Style>
+										</RelativeLayout.Resources>
+										<custom:ClickableListView x:Name="EyesListView" Rotation="270" ItemsSource="{Binding EyeOptions}" SeparatorVisibility="None" RowHeight="150"
 									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-55}"
 									RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=30}"
 									RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=150}"
 									RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.2}"
 									BackgroundColor="Transparent" ItemClickCommand="{Binding ItemClick}">
-									<ListView.ItemTemplate>
-										<DataTemplate> 
-											<ViewCell>
-												<ContentView  Rotation="90" BackgroundColor="Transparent">
-													<Grid Padding="10" HeightRequest="100">
-														<Grid.RowDefinitions>
-															<RowDefinition Height="*"/>
-															<RowDefinition Height="4*"/>
-															<RowDefinition Height="*"/>
-															<RowDefinition Height="0.5*"/>
-														</Grid.RowDefinitions>
-														<Label Text="{Binding Name}" Grid.Row="0"
+											<ListView.ItemTemplate>
+												<DataTemplate>
+													<ViewCell>
+														<ContentView  Rotation="90" BackgroundColor="Transparent">
+															<Grid Padding="10" HeightRequest="100">
+																<Grid.RowDefinitions>
+																	<RowDefinition Height="*"/>
+																	<RowDefinition Height="4*"/>
+																	<RowDefinition Height="*"/>
+																	<RowDefinition Height="0.5*"/>
+																</Grid.RowDefinitions>
+																<Label Text="{Binding Name}" Grid.Row="0"
 															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-														<BoxView Color="Gray" Grid.Row="1"/>
-														<Label Text="{Binding Description}" Grid.Row="2" FontSize="Micro"
+																<BoxView Color="Gray" Grid.Row="1"/>
+																<Label Text="{Binding Description}" Grid.Row="2" FontSize="Micro"
 															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
-													</Grid>
-												</ContentView>
-											</ViewCell>
-										</DataTemplate>
-									</ListView.ItemTemplate>
-								</custom:ClickableListView>
-							</RelativeLayout>
-
-							<Grid HeightRequest="200">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="5*"/>
-									<ColumnDefinition Width="8*"/>
-									<ColumnDefinition Width="13*"/>
-								</Grid.ColumnDefinitions>
-								<Label Grid.Column="0" Text="You chose: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-								<!--Make sure this is the same as the list view-->
-								<Frame Grid.Column="1" Padding="0" Margin="3, 15, 0, 0">
-									<Frame.Content>
-										<Grid Padding="10" HeightRequest="100">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="*"/>
-												<RowDefinition Height="4*"/>
-												<RowDefinition Height="*"/>
-												<RowDefinition Height="0.5*"/>
-											</Grid.RowDefinitions>
-											<Label Text="{Binding ChosenEyeOption.Name}" Grid.Row="0"
+															</Grid>
+														</ContentView>
+													</ViewCell>
+												</DataTemplate>
+											</ListView.ItemTemplate>
+										</custom:ClickableListView>
+									</RelativeLayout>
+								</StackLayout>
+								<Grid Grid.Row="1">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="5*"/>
+										<ColumnDefinition Width="8*"/>
+										<ColumnDefinition Width="10*"/>
+									</Grid.ColumnDefinitions>
+									<Label Grid.Column="0" Text="You chose: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+									<!--Make sure this is the same as the list view-->
+									<Frame Grid.Column="1" Padding="0" Margin="3, 15, 0, 0">
+										<Frame.Content>
+											<Grid Padding="10" HeightRequest="100">
+												<Grid.RowDefinitions>
+													<RowDefinition Height="*"/>
+													<RowDefinition Height="4*"/>
+													<RowDefinition Height="*"/>
+													<RowDefinition Height="0.5*"/>
+												</Grid.RowDefinitions>
+												<Label Text="{Binding ChosenEyeOption.Name}" Grid.Row="0"
 															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-											<BoxView Color="Gray" Grid.Row="1"/>
-											<Label Text="{Binding ChosenEyeOption.Description}" Grid.Row="2" FontSize="Micro"
+												<BoxView Color="Gray" Grid.Row="1"/>
+												<Label Text="{Binding ChosenEyeOption.Description}" Grid.Row="2" FontSize="Micro"
 															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
-										</Grid>
-									</Frame.Content>
-								</Frame>
+											</Grid>
+										</Frame.Content>
+									</Frame>
+								</Grid>
 							</Grid>
 
 							<Button x:Name="FinishButton" Text="Update recommendations" Clicked="FinishButton_Clicked" Margin="0, 35, 0, 0"/>

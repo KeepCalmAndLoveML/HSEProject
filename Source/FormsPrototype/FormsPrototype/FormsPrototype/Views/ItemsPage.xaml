@@ -47,8 +47,8 @@
 				   HorizontalOptions="Center"/>
 
 								<!--<BoxView BackgroundColor="Gray" HeightRequest="100" Margin="50, 0"/> -->
-								<Image HeightRequest="128" Margin="50, 0" HorizontalOptions="Center"
-									   Aspect="AspectFill" Source="{Binding RessourceIdSmall, Converter={StaticResource ImageConverter}}"/>
+								<Image HeightRequest="128" WidthRequest="128" Margin="50, 0" HorizontalOptions="Center"
+									   Aspect="AspectFit" Source="{Binding RessourceIdSmall, Converter={StaticResource ImageConverter}}"/>
 							</StackLayout>
 						</ViewCell>
                     </DataTemplate>

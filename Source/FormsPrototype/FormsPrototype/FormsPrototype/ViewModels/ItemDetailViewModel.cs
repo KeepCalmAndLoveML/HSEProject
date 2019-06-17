@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 using FormsPrototype.Models;
 
@@ -14,36 +16,17 @@ namespace FormsPrototype.ViewModels
 		{
 			Title = item?.Name;
 			Item = item;
-			
-			//TODO: This should get the items from the data store
-			RelatedItems = new List<Item>()
-			{
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Name = "Nike air max x96 aaa",
-					Description = "Just put them on your feet",
-					ShoeSize = 260,
-					Gender = Gender.Male
-				},
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Name = "Adidas ultraboost x123",
-					Description ="Soooooooo comfortable",
-					ShoeSize = 240,
-					Gender = Gender.Female
-				},
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Name = "Some Reebook shit",
-					Description ="The coolest thing on the market",
-					ShoeSize = 275,
-					Gender = Gender.Male
-				}
-			};
 
+			Task.Run(GetItems);
+		}
+
+		public async void GetItems()
+		{
+			//TODO: This should get the items from the data store
+			var ds = new Services.MockDataStore();
+			var items = await ds.GetItemsAsync();
+
+			RelatedItems = items.ToList();
 		}
 	}
 }
