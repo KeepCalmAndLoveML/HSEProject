@@ -25,6 +25,12 @@ namespace FormsPrototype.ViewModels
 			}
 		}
 
+		//Please don't hit me for male supremacy
+		public bool GenderIsMan { get; set; } = true;
+
+		//This is needed for Bindings
+		public bool GenderIsWoman { get => !GenderIsMan; }
+
 		public ParamsViewModel()
 		{
 			Title = "Parameters";

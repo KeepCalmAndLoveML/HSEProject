@@ -71,6 +71,17 @@ namespace FormsPrototype.Views
 			HighlightElement((View)sender);
 		}
 		
+		private void PickerFocused(object sender, FocusEventArgs e)
+		{
+			HighlightElement((View)sender);
+		}
+
+		//Why doesn't this work?
+		private void ChooseEyeColorGrid_Focused(object sender, FocusEventArgs e)
+		{
+			HighlightElement(ChooseEyeColorGrid);
+		}
+
 		private void MainCanvasViewPaintSurfaceRequested(object sender, SKPaintSurfaceEventArgs e)
 		{
 			Highlighter.Draw(MainCanvasView, e.Surface.Canvas);
@@ -85,6 +96,13 @@ namespace FormsPrototype.Views
 			HighlightElement((View)sender);
 		}
 
-
+		private void GenderPicker_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			string gender = (sender as Picker).SelectedItem as string;
+			if (gender == "Man")
+				ViewModel.GenderIsMan = true;
+			else
+				ViewModel.GenderIsMan = false;
+		}
 	}
 }

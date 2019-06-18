@@ -14,7 +14,17 @@ namespace FormsPrototype.Animations
 	class HighlightPath
 	{
 		//The highlighter will higlight elements with types that inherit from those in this list
-		public static readonly List<Type> AllowedUITypes = new List<Type>() { typeof(Button), typeof(Entry), typeof(BoxView), typeof(Image) };
+		//TODO: Adjust these
+		public static readonly List<Type> AllowedUITypes = new List<Type>()
+		{
+			typeof(Button),
+			typeof(Entry),
+			typeof(BoxView),
+			typeof(Image),
+			typeof(Picker),
+			typeof(ImageButton),
+			typeof(Grid),
+		};
 
 		//StrokeDashMap[Id] -> StrokeDash
 		private readonly Dictionary<int, StrokeDash> StrokeDashMap = new Dictionary<int, StrokeDash>();

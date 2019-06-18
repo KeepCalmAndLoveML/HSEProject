@@ -11,9 +11,6 @@ namespace FormsPrototype.Models
     {
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public string ImageSource { get; set; }
-
-		//TODO: Make this dependent of ImageSource
-		public Image Image { get; set; }
+		public string ImageRessourceId { get; set; }
     }
 }
