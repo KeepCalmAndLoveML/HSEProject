@@ -103,6 +103,8 @@ namespace FormsPrototype.Views
 				ViewModel.GenderIsMan = true;
 			else
 				ViewModel.GenderIsMan = false;
+
+			//DisplayAlert("Debug", $"{ViewModel.GenderIsMan}->{MBodyImage.IsVisible}, {ViewModel.GenderIsWoman}->{WBodyImage.IsVisible}", "Ok");
 		}
 	}
 }

@@ -7,12 +7,14 @@ using System.Linq;
 
 using FormsPrototype.Models;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace FormsPrototype.ViewModels
 {
 	public class ParamsViewModel : BaseViewModel
 	{
 		private ChooseEyeOption _chosenEyeOption;
+		private ReadOnlyCollection<string> MenBodyTypes, WomanBodyTypes;
 
 		public List<ChooseEyeOption> EyeOptions { get; set; }
 		public ChooseEyeOption ChosenEyeOption
@@ -25,11 +27,27 @@ namespace FormsPrototype.ViewModels
 			}
 		}
 
+		public List<string> BodyTypeNames
+		{
+			get
+			{
+				return GenderIsMan ? MenBodyTypes.ToList() : WomanBodyTypes.ToList();
+			}
+			set
+			{
+
+			}
+		}
+
 		//Please don't hit me for male supremacy
 		public bool GenderIsMan { get; set; } = true;
 
 		//This is needed for Bindings
-		public bool GenderIsWoman { get => !GenderIsMan; }
+		public bool GenderIsWoman
+		{
+			get => !GenderIsMan;
+			set => GenderIsMan = !value;
+		}
 
 		public ParamsViewModel()
 		{
@@ -47,6 +65,9 @@ namespace FormsPrototype.ViewModels
 			EyeOptions.AddRange(Enumerable.Repeat(new ChooseEyeOption { Name = "Lorem Ipsum", Description = "Gorgeous" }, 10));
 
 			ChosenEyeOption = EyeOptions[0];
+
+			MenBodyTypes = new ReadOnlyCollection<string>(new List<string>() { "Body type 1", "Body type 2", "Body type 3"});
+			MenBodyTypes = new ReadOnlyCollection<string>(new List<string>() { "Body type 1", "Body type 2", "Body type 3" });
 		}
 
 		public ICommand ItemClick

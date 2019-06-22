@@ -66,6 +66,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\ChoosableViewCellRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomViewCellRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />

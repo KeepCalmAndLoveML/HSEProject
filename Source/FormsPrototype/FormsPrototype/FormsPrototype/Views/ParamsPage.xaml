@@ -30,7 +30,7 @@
 	</ContentPage.Resources>
 	<ContentPage.Content>
 		<ScrollView Orientation="Vertical" Padding="0">
-			<Frame BackgroundColor="#00AEAE" HasShadow="True" CornerRadius="10" Padding="0">
+			<Frame BackgroundColor="{StaticResource BackgroundLightBlue}" HasShadow="True" CornerRadius="10" Padding="0">
 				<StackLayout>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -55,7 +55,7 @@
 							<Label Text="Weight" Margin="3, 15, 0, 0"/>
 							<Entry Text="Sample Weight" Focused="EntryFocused"/>
 
-							<Picker x:Name="GenderPicker" Title="Gender" SelectedIndex="1" Margin="3, 15, 0, 0" 
+							<Picker x:Name="GenderPicker" Title="Gender" SelectedIndex="0" Margin="3, 15, 0, 0" 
 									Focused="PickerFocused" SelectedIndexChanged="GenderPicker_SelectedIndexChanged">
 								<Picker.Items>
 									<x:String>Man</x:String>
@@ -64,10 +64,10 @@
 							</Picker>
 
 							<!-- Chooosing eye color -->
-							<Grid x:Name="ChooseEyeColorGrid" Focused="ChooseEyeColorGrid_Focused">
+							<Grid x:Name="ChooseEyeColorGrid" Focused="ChooseEyeColorGrid_Focused" RowSpacing="15">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="150"/>
-									<RowDefinition Height="150"/>
+									<RowDefinition Height="140"/>
 								</Grid.RowDefinitions>
 								<!-- Horizontal List View -->
 								<StackLayout Padding="0" Grid.Row="0">
@@ -122,10 +122,11 @@
 										<ColumnDefinition Width="13*"/>
 										<ColumnDefinition Width="8*"/>
 									</Grid.ColumnDefinitions>
+									
 									<Label Grid.Column="0" Text="You chose: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
 									
-									<!--Make sure this is the same as the list view-->
-									<Frame x:Name="ChoosenEyeFrame" Grid.Column="1" Padding="0" Margin="3, 15, 0, 0">
+									<!--Make sure this is the same as the list view--> 
+									<Frame x:Name="ChoosenEyeFrame" Grid.Column="1" Padding="0" Margin="3, 15, 0, 0" BackgroundColor="Transparent">
 										<Frame.Content>
 											<Grid Padding="10" HeightRequest="100">
 												<Grid.RowDefinitions>
@@ -146,13 +147,72 @@
 							</Grid>
 							
 							<!-- Choosing body type -->
+							
+							<Grid x:Name="MenBodyTypeGrid" Padding="0" ColumnSpacing="10" RowSpacing="10" Margin="0, 10, 0, 0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="384"/>
+									<RowDefinition Height="384"/>
+									<RowDefinition Height="384"/>
+									<RowDefinition Height="384"/>
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								
+								<Frame HasShadow="False" BackgroundColor="Transparent"
+								   Padding="1" CornerRadius="5" BorderColor="{StaticResource Dark}">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="0.5"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+
+										<StackLayout Orientation="Vertical" Grid.Column="0" Padding="5">
+											<Label Text="Title" FontSize="24" TextColor="Black"
+												   HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0, 0, 0, 10"/>
+											<ScrollView Orientation="Vertical">
+												<Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et nisi id neque posuere pulvinar eget in dui. Vivamus sed sollicitudin ligula, non pharetra justo. Aliquam erat volutpat."
+												   FontSize="14" LineBreakMode="WordWrap" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+											</ScrollView>
+										</StackLayout>
+
+										<BoxView Grid.Column="1" Color="Black" BackgroundColor="{StaticResource Dark}"/>
+										
+										<ImageButton x:Name="MBodyImage" IsVisible="{Binding GenderIsMan}" Aspect="AspectFit" 
+										 HorizontalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="380" WidthRequest="145"
+										 Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.mbt_one.png}"/>
+									</Grid>
+								</Frame>
+								
+								<Frame Grid.Row="1" BorderColor="Black">
+									
+								</Frame>
+
+								<Frame Grid.Row="2" BorderColor="Black">
+
+								</Frame>
+								
+								<Frame Grid.Row="3" BorderColor="Black">
+
+								</Frame>
+							</Grid>
+							
+							
+							<!--
 							<ImageButton x:Name="MBodyImage" IsVisible="{Binding GenderIsMan}" Aspect="AspectFit" 
-										 HeightRequest="256" HorizontalOptions="Center"
+										 HorizontalOptions="Center" Grid.Column="2" HeightRequest="512"
 										 Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.mbt_one.png}"/>
 
 							<ImageButton x:Name="WBodyImage" IsVisible="{Binding GenderIsWoman}" Aspect="AspectFit" 
 										 HeightRequest="256" HorizontalOptions="Center"
 										 Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.wbt_one.png}"/>
+							-->
+							
+							<Picker x:Name="BodyTypePicker" Focused="PickerFocused" SelectedIndex="0" Title="Body Type"
+									ItemsSource="{Binding BodyTypeNames}">
+				
+							</Picker>
 
 							<Button x:Name="FinishButton" Text="Update recommendations" Clicked="FinishButton_Clicked" Margin="0, 35, 0, 0"/>
 						</StackLayout>

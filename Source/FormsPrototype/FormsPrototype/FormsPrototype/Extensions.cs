@@ -59,5 +59,10 @@ namespace FormsPrototype
 
 			return $"{typeof(SimpleExtensions).Assembly.GetName().Name}.Images.{filename}";
 		}
+
+		public static TimeSpan Multiply(this TimeSpan timeSpan, double coef)
+		{
+			return TimeSpan.FromMilliseconds(timeSpan.TotalMilliseconds * coef);
+		}
 	}
 }

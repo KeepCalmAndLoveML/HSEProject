@@ -20,7 +20,7 @@
     </ContentPage.ToolbarItems>
 	-->
 	<ContentPage.Content>
-		<StackLayout x:Name="MainLayout">
+		<StackLayout x:Name="MainLayout" BackgroundColor="{StaticResource White }">
 			<ListView x:Name="ItemsListView" 
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"

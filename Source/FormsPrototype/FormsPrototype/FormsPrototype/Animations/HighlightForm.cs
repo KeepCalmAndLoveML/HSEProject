@@ -77,17 +77,19 @@ namespace FormsPrototype.Animations
 			HightLightState.CurrHighlightedViewId = iViewIdToHighlight;
 
 			StrokeDash toDash = new StrokeDash(highlightPath.GetDashForView(layoutChildren, viewToHighlight));
-			DrawDash(skCanvasView, fromDash, toDash);
+
+			double distance = Math.Abs(layoutChildren[iViewIdToHighlight].Bounds.X - layoutChildren[currHighlightViewId].Bounds.X);
+			DrawDash(skCanvasView, fromDash, toDash, distance / 70);
 		}
 
-		void DrawDash(SKCanvasView skCanvasView, StrokeDash fromDash, StrokeDash toDash)
+		void DrawDash(SKCanvasView skCanvasView, StrokeDash fromDash, StrokeDash toDash, double durationMultiplier = 1)
 		{
 			if(fromDash != null)
 			{
 				var anim = new StrokeDashAnimation(
 					from: fromDash,
 					to: toDash,
-					duration: HightlightSettings.AnimationDuration);
+					duration: HightlightSettings.AnimationDuration.Multiply(durationMultiplier));
 
 				anim.Start((strokeDashToDraw) => RequestDraw(skCanvasView, strokeDashToDraw));
 			}
