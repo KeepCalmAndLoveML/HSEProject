@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
+using System.Diagnostics;
 
 namespace FormsPrototype.Animations
 {
@@ -78,8 +79,15 @@ namespace FormsPrototype.Animations
 
 			StrokeDash toDash = new StrokeDash(highlightPath.GetDashForView(layoutChildren, viewToHighlight));
 
-			double distance = Math.Abs(layoutChildren[iViewIdToHighlight].Bounds.X - layoutChildren[currHighlightViewId].Bounds.X);
-			DrawDash(skCanvasView, fromDash, toDash, distance / 70);
+			//This is ugly
+			int temp = currHighlightViewId;
+			if (temp == -1)
+				currHighlightViewId = 0;
+			double distance = Math.Abs(layoutChildren[iViewIdToHighlight].Bounds.Y - layoutChildren[currHighlightViewId].Bounds.Y);
+			currHighlightViewId = temp;
+			distance = Math.Min(distance, 3 * 60);
+
+			DrawDash(skCanvasView, fromDash, toDash, distance / 60);
 		}
 
 		void DrawDash(SKCanvasView skCanvasView, StrokeDash fromDash, StrokeDash toDash, double durationMultiplier = 1)

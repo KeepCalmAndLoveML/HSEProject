@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Diagnostics;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -41,7 +42,8 @@ namespace FormsPrototype.Images
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var img = new EmbeddedImage() { RessourceId = value as string };
+			var img = new EmbeddedImage()  { RessourceId = value as string };
+			Debug.WriteLine(img.RessourceId);
 
 			return img.MyProvideValue();
 		}

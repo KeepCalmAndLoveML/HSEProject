@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms.Platform.iOS;
 
 namespace FormsPrototype.iOS
 {
@@ -26,7 +27,9 @@ namespace FormsPrototype.iOS
 			global::Xamarin.Forms.FormsMaterial.Init();
 			LoadApplication(new App());
 
-            return base.FinishedLaunching(app, options);
+			MaterialComponents.TabBar.Appearance.TintColor = Xamarin.Forms.Color.FromHex("#272A44").ToUIColor();
+			MaterialComponents.TabBar.Appearance.BackgroundColor = Xamarin.Forms.Color.FromHex("#272A44").ToUIColor();
+			return base.FinishedLaunching(app, options);
         }
     }
 }

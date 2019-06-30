@@ -51,6 +51,8 @@ namespace FormsPrototype
 			//Those checks might be slow, redundant and unnecessary...
 			//But this ressource thing seems scary not throwing exceptions, so I might as well leave them here
 
+			if (string.IsNullOrEmpty(filename))
+				throw new ArgumentException("Ressource name cannot be null or empty");
 			//I decided jpg might also be nice for memory saving.
 			//if (Path.GetExtension(filename) != "png")
 				//throw new ArgumentException("Are you sure you want to use non png files?");

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\eye_one.png" />
     <None Remove="Images\mbt_one.png" />
     <None Remove="Images\shoes_one.png" />
     <None Remove="Images\shoes_two.jpg" />
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images\eye_one.png" />
     <EmbeddedResource Include="Images\mbt_one.png" />
     <EmbeddedResource Include="Images\shoes_one.png" />
     <EmbeddedResource Include="Images\shoes_two.jpg" />
@@ -31,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\BodyTypeView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ItemView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

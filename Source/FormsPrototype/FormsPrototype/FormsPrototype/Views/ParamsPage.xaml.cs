@@ -19,8 +19,8 @@ namespace FormsPrototype.Views
 	public partial class ParamsPage : ContentPage
 	{
 		//Put settings here so they are easier to change in the future
-		public readonly static Color GradientStart = Color.FromHex("#FF4600");
-		public readonly static Color GradientEnd = Color.FromHex("#CC00AF");
+		public readonly static Color GradientStart = Color.FromHex("#A6B1E1".ToUpper());
+		public readonly static Color GradientEnd = Color.FromHex("#f4c95d".ToUpper());
 		public readonly static TimeSpan StrokeAnimationDuration = TimeSpan.FromMilliseconds(900);
 		public readonly static Easing StrokeAnimationEasing = Easing.CubicInOut;
 
@@ -39,7 +39,7 @@ namespace FormsPrototype.Views
 			(
 				new HighlightSettings()
 				{
-					StrokeWidth = 6,
+					StrokeWidth = 8,
 					StrokeStartColor = GradientStart,
 					StrokeEndColor = GradientEnd,
 					AnimationDuration = StrokeAnimationDuration,
@@ -104,7 +104,17 @@ namespace FormsPrototype.Views
 			else
 				ViewModel.GenderIsMan = false;
 
+			MenBodyTypeGrid.IsVisible = ViewModel.GenderIsMan && BodyTypeSwitchCell.On;
+			WomenBodyTypeGrid.IsVisible = ViewModel.GenderIsWoman && BodyTypeSwitchCell.On;
 			//DisplayAlert("Debug", $"{ViewModel.GenderIsMan}->{MBodyImage.IsVisible}, {ViewModel.GenderIsWoman}->{WBodyImage.IsVisible}", "Ok");
+		}
+
+		private void BodyTypeSwitchCell_OnChanged(object sender, ToggledEventArgs e)
+		{
+			SwitchCell sc = sender as SwitchCell;
+
+			MenBodyTypeGrid.IsVisible &= sc.On;
+			WomenBodyTypeGrid.IsVisible &= sc.On;
 		}
 	}
 }

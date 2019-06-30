@@ -92,7 +92,7 @@ namespace FormsPrototype.Animations
 				// and line direction is either to view start or view end
 				path.LineTo((float)viewBounds.X + (float)viewBounds.Width * ( dashCount % 2 == 0 ? 1 : 0 ), path.LastPoint.Y);
 
-				if(view is Button || view is BoxView || view is Picker)
+				if(view is Button || view is BoxView)
 				{
 					xCurr = path.LastPoint.X;
 					yCurr = path.LastPoint.Y;

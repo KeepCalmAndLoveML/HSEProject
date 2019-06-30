@@ -4,6 +4,7 @@
 			 xmlns:skiaSharp="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
 			 xmlns:custom="clr-namespace:FormsPrototype.CustomControls;assembly=FormsPrototype"
 			 xmlns:image="clr-namespace:FormsPrototype.Images"
+			 xmlns:views="clr-namespace:FormsPrototype.Views"
              x:Class="FormsPrototype.Views.ParamsPage"
 			 Title="{Binding Title}">
 	<ContentPage.Resources>
@@ -30,7 +31,7 @@
 	</ContentPage.Resources>
 	<ContentPage.Content>
 		<ScrollView Orientation="Vertical" Padding="0">
-			<Frame BackgroundColor="{StaticResource BackgroundLightBlue}" HasShadow="True" CornerRadius="10" Padding="0">
+			<Frame BackgroundColor="{StaticResource White}" HasShadow="True" CornerRadius="10" Padding="0">
 				<StackLayout>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -40,7 +41,7 @@
 						<skiaSharp:SKCanvasView x:Name="MainCanvasView" 
 										PaintSurface="MainCanvasViewPaintSurfaceRequested"/>
 						<StackLayout x:Name="MainLayout"
-							  Padding="60, 25, 60, 20"
+							  Padding="30, 25, 30, 20"
                               Orientation="Vertical"
                               Spacing="2">
 							<StackLayout.Resources>
@@ -55,23 +56,36 @@
 							<Label Text="Weight" Margin="3, 15, 0, 0"/>
 							<Entry Text="Sample Weight" Focused="EntryFocused"/>
 
-							<Picker x:Name="GenderPicker" Title="Gender" SelectedIndex="0" Margin="3, 15, 0, 0" 
-									Focused="PickerFocused" SelectedIndexChanged="GenderPicker_SelectedIndexChanged">
+							<Picker x:Name="GenderPicker" Title="Gender" SelectedIndex="0" Margin="3, 25, 0, 0" 
+									Focused="PickerFocused" SelectedIndexChanged="GenderPicker_SelectedIndexChanged"
+									BackgroundColor="{StaticResource White}" TitleColor="{StaticResource Dark}">
 								<Picker.Items>
 									<x:String>Man</x:String>
 									<x:String>Woman</x:String>
 								</Picker.Items>
 							</Picker>
 
+							<TableView Intent="Settings" HeightRequest="20">
+								<TableView.Root>
+									<TableSection>
+										<SwitchCell x:Name="BodyTypeSwitchCell" Text="Show body types" On="True" OnChanged="BodyTypeSwitchCell_OnChanged"/>
+									</TableSection>
+								</TableView.Root>
+							</TableView>
+
 							<!-- Chooosing eye color -->
-							<Grid x:Name="ChooseEyeColorGrid" Focused="ChooseEyeColorGrid_Focused" RowSpacing="15">
+							<Grid x:Name="ChooseEyeColorGrid" RowSpacing="15">
 								<Grid.RowDefinitions>
-									<RowDefinition Height="150"/>
+									<RowDefinition Height="180"/>
 									<RowDefinition Height="140"/>
 								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								
 								<!-- Horizontal List View -->
 								<StackLayout Padding="0" Grid.Row="0">
-									<RelativeLayout Margin="0, 45, 0, 0" Padding="0" BackgroundColor="Transparent">
+									<RelativeLayout Margin="0, 45, 0, 0" Padding="0" BackgroundColor="Transparent" IsClippedToBounds="True">
 										<RelativeLayout.Resources>
 											<Style TargetType="ListView">
 												<Setter Property="RowHeight">
@@ -95,8 +109,8 @@
 											<ListView.ItemTemplate>
 												<DataTemplate>
 													<ViewCell>
-														<ContentView  Rotation="90" BackgroundColor="Transparent">
-															<Grid Padding="10" HeightRequest="100">
+														<ContentView  Rotation="90" BackgroundColor="Transparent" Padding="3">
+															<Grid Padding="10" HeightRequest="100" WidthRequest="128">
 																<Grid.RowDefinitions>
 																	<RowDefinition Height="*"/>
 																	<RowDefinition Height="4*"/>
@@ -105,7 +119,8 @@
 																</Grid.RowDefinitions>
 																<Label Text="{Binding Name}" Grid.Row="0"
 															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-																<BoxView Color="Gray" Grid.Row="1"/>
+																<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.eye_one.png}"
+																	   WidthRequest="128" HeightRequest="64"/>
 																<Label Text="{Binding Description}" Grid.Row="2" FontSize="Micro"
 															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
 															</Grid>
@@ -137,17 +152,17 @@
 												</Grid.RowDefinitions>
 												<Label Text="{Binding ChosenEyeOption.Name}" Grid.Row="0"
 															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-												<BoxView Color="Gray" Grid.Row="1"/>
+												<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.eye_one.png}"
+														WidthRequest="128" HeightRequest="64"/>
 												<Label Text="{Binding ChosenEyeOption.Description}" Grid.Row="2" FontSize="Micro"
 															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
 											</Grid>
 										</Frame.Content>
 									</Frame>
 								</Grid>
-							</Grid>
+							</Grid>  
 							
 							<!-- Choosing body type -->
-							
 							<Grid x:Name="MenBodyTypeGrid" Padding="0" ColumnSpacing="10" RowSpacing="10" Margin="0, 10, 0, 0">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="384"/>
@@ -160,7 +175,7 @@
 								</Grid.ColumnDefinitions>
 								
 								<Frame HasShadow="False" BackgroundColor="Transparent"
-								   Padding="1" CornerRadius="5" BorderColor="{StaticResource Dark}">
+								   Padding="1" CornerRadius="5" BorderColor="Transparent">
 									<Grid>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="*"/>
@@ -177,17 +192,18 @@
 											</ScrollView>
 										</StackLayout>
 
-										<BoxView Grid.Column="1" Color="Black" BackgroundColor="{StaticResource Dark}"/>
+										<BoxView Grid.Column="1" Color="Transparent"/>
 										
 										<ImageButton x:Name="MBodyImage" IsVisible="{Binding GenderIsMan}" Aspect="AspectFit" 
 										 HorizontalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="380" WidthRequest="145"
 										 Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.mbt_one.png}"/>
 									</Grid>
 								</Frame>
-								
-								<Frame Grid.Row="1" BorderColor="Black">
-									
-								</Frame>
+
+								<views:BodyTypeView Grid.Row="1" Title="Title"
+													Description="Will this actually work?"
+													ImageRessourceId="mbt_one.png">
+								</views:BodyTypeView>
 
 								<Frame Grid.Row="2" BorderColor="Black">
 
@@ -197,24 +213,29 @@
 
 								</Frame>
 							</Grid>
-							
-							
-							<!--
-							<ImageButton x:Name="MBodyImage" IsVisible="{Binding GenderIsMan}" Aspect="AspectFit" 
-										 HorizontalOptions="Center" Grid.Column="2" HeightRequest="512"
-										 Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.mbt_one.png}"/>
 
-							<ImageButton x:Name="WBodyImage" IsVisible="{Binding GenderIsWoman}" Aspect="AspectFit" 
-										 HeightRequest="256" HorizontalOptions="Center"
-										 Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.wbt_one.png}"/>
-							-->
+							<Grid x:Name="WomenBodyTypeGrid" Padding="0" ColumnSpacing="10" RowSpacing="10" Margin="0, 10, 0, 0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="384"/>
+									<RowDefinition Height="384"/>
+									<RowDefinition Height="384"/>
+									<RowDefinition Height="384"/>
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+
+								<views:BodyTypeView Title="Woman" Description="Ah shit! Here we go again"
+													ImageRessourceId="wbt_one.png">
+								</views:BodyTypeView>
+							</Grid>
 							
-							<Picker x:Name="BodyTypePicker" Focused="PickerFocused" SelectedIndex="0" Title="Body Type"
-									ItemsSource="{Binding BodyTypeNames}">
+							<Picker x:Name="BodyTypePicker" SelectedIndex="0" Title="Choose your body Type"
+									ItemsSource="{Binding BodyTypeNames}" Margin="3, 25, 0, 0">
 				
 							</Picker>
 
-							<Button x:Name="FinishButton" Text="Update recommendations" Clicked="FinishButton_Clicked" Margin="0, 35, 0, 0"/>
+							<Button x:Name="FinishButton" Text="Update recommendations" Clicked="FinishButton_Clicked" Margin="0, 15, 0, 0"/>
 						</StackLayout>
 					</Grid>
 				</StackLayout>
