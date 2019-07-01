@@ -8,26 +8,29 @@
              x:Class="FormsPrototype.Views.ParamsPage"
 			 Title="{Binding Title}">
 	<ContentPage.Resources>
-		<!--TODO: Find more suitable colors -->
-		<Style TargetType="Label">
-			<Setter Property="FontSize" Value="16" />
-			<Setter Property="TextColor" Value="#333333"/>
-		</Style>
-		<Style TargetType="Picker">
-			<Setter Property="FontSize" Value="16"/>
-			<Setter Property="TextColor" Value="#333333"/>
-		</Style>
-		<Style TargetType="Entry">
-			<Setter Property="BackgroundColor" Value="#262626" />
-			<Setter Property="HeightRequest" Value="40" />
-			<Setter Property="FontSize" Value="16" />
-			<Setter Property="TextColor" Value="{StaticResource White}" />
-		</Style>
-		<Style TargetType="Button">
-			<Setter Property="FontSize" Value="16"/>
-			<Setter Property="BackgroundColor" Value="{StaticResource White}"/>
-			<Setter Property="TextColor" Value="#1b1537"/>
-		</Style>
+		<ResourceDictionary>
+			<!--TODO: Find more suitable colors -->
+			<Color x:Key="LightBlack">#333333</Color>
+			<Style TargetType="Label">
+				<Setter Property="FontSize" Value="16" />
+				<Setter Property="TextColor" Value="{StaticResource LightBlack}"/>
+			</Style>
+			<Style TargetType="Picker">
+				<Setter Property="FontSize" Value="16"/>
+				<Setter Property="TextColor" Value="{StaticResource LightBlack}"/>
+			</Style>
+			<Style TargetType="Entry">
+				<Setter Property="BackgroundColor" Value="#262626" />
+				<Setter Property="HeightRequest" Value="40" />
+				<Setter Property="FontSize" Value="16" />
+				<Setter Property="TextColor" Value="{StaticResource White}" />
+			</Style>
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="16"/>
+				<Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+				<Setter Property="TextColor" Value="#1b1537"/>
+			</Style>
+		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ContentPage.Content>
 		<ScrollView Orientation="Vertical" Padding="0">
@@ -65,13 +68,16 @@
 								</Picker.Items>
 							</Picker>
 
-							<TableView Intent="Settings" HeightRequest="20">
-								<TableView.Root>
-									<TableSection>
-										<SwitchCell x:Name="BodyTypeSwitchCell" Text="Show body types" On="True" OnChanged="BodyTypeSwitchCell_OnChanged"/>
-									</TableSection>
-								</TableView.Root>
-							</TableView>
+									<StackLayout Orientation="Horizontal" Padding="5">
+										<Label Text="Show body type definitions" FontSize="16" FontAttributes="Bold" 
+									   HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+									VerticalOptions="Center" TextColor="{StaticResource Black}"/>
+
+										<BoxView HorizontalOptions="CenterAndExpand" Color="Transparent"/>
+
+										<Switch x:Name="BodyTypeSwitch" IsToggled="True" Toggled="Switch_Toggled"
+										VerticalOptions="Center"/>
+									</StackLayout>
 
 							<!-- Chooosing eye color -->
 							<Grid x:Name="ChooseEyeColorGrid" RowSpacing="15">
@@ -141,7 +147,7 @@
 									<Label Grid.Column="0" Text="You chose: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
 									
 									<!--Make sure this is the same as the list view--> 
-									<Frame x:Name="ChoosenEyeFrame" Grid.Column="1" Padding="0" Margin="3, 15, 0, 0" BackgroundColor="Transparent">
+									<Frame x:Name="ChoosenEyeFrame" Grid.Column="1" Padding="0" Margin="3, 15, 0, 0" BackgroundColor="Transparent" HasShadow="False">
 										<Frame.Content>
 											<Grid Padding="10" HeightRequest="100">
 												<Grid.RowDefinitions>

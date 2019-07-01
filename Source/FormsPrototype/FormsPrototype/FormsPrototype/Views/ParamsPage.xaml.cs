@@ -96,6 +96,12 @@ namespace FormsPrototype.Views
 			HighlightElement((View)sender);
 		}
 
+		void UpdateBodyTypeGrids()
+		{
+			MenBodyTypeGrid.IsVisible = ViewModel.GenderIsMan && BodyTypeSwitch.IsToggled;
+			WomenBodyTypeGrid.IsVisible = ViewModel.GenderIsWoman && BodyTypeSwitch.IsToggled;
+		}
+
 		private void GenderPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string gender = (sender as Picker).SelectedItem as string;
@@ -104,17 +110,12 @@ namespace FormsPrototype.Views
 			else
 				ViewModel.GenderIsMan = false;
 
-			MenBodyTypeGrid.IsVisible = ViewModel.GenderIsMan && BodyTypeSwitchCell.On;
-			WomenBodyTypeGrid.IsVisible = ViewModel.GenderIsWoman && BodyTypeSwitchCell.On;
-			//DisplayAlert("Debug", $"{ViewModel.GenderIsMan}->{MBodyImage.IsVisible}, {ViewModel.GenderIsWoman}->{WBodyImage.IsVisible}", "Ok");
+			UpdateBodyTypeGrids();
 		}
 
-		private void BodyTypeSwitchCell_OnChanged(object sender, ToggledEventArgs e)
+		private void Switch_Toggled(object sender, ToggledEventArgs e)
 		{
-			SwitchCell sc = sender as SwitchCell;
-
-			MenBodyTypeGrid.IsVisible &= sc.On;
-			WomenBodyTypeGrid.IsVisible &= sc.On;
+			UpdateBodyTypeGrids();
 		}
 	}
 }

@@ -8,6 +8,7 @@
             <!--Global Styles-->
 			<Color x:Key="NavigationPrimary">#272A44</Color>
 			<Color x:Key="White">#FFFFFF</Color>
+			<Color x:Key="Black">#000000</Color>
 			<Color x:Key="AsphaltPrimary">#365271</Color>
 			<Color x:Key="AsphaltDark">#1C2B39</Color>
 			<Color x:Key="GrayPrimary">#ADB7BE</Color>
