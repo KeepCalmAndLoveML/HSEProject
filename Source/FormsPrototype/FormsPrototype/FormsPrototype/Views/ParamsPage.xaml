@@ -68,16 +68,16 @@
 								</Picker.Items>
 							</Picker>
 
-									<StackLayout Orientation="Horizontal" Padding="5">
-										<Label Text="Show body type definitions" FontSize="16" FontAttributes="Bold" 
+							<StackLayout Orientation="Horizontal" Padding="5" Margin="3, 15, 0, 0">
+								<Label Text="Show body type definitions" FontSize="16" FontAttributes="Bold" 
 									   HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
 									VerticalOptions="Center" TextColor="{StaticResource Black}"/>
 
-										<BoxView HorizontalOptions="CenterAndExpand" Color="Transparent"/>
+								<BoxView HorizontalOptions="CenterAndExpand" Color="Transparent"/>
 
-										<Switch x:Name="BodyTypeSwitch" IsToggled="True" Toggled="Switch_Toggled"
+								<Switch x:Name="BodyTypeSwitch" IsToggled="True" Toggled="Switch_Toggled"
 										VerticalOptions="Center"/>
-									</StackLayout>
+							</StackLayout>
 
 							<!-- Chooosing eye color -->
 							<Grid x:Name="ChooseEyeColorGrid" RowSpacing="15">

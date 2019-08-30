@@ -21,6 +21,9 @@ namespace MathModelDemo
 		}
 
 		#region Parameter functions
+		//Each parameter function returns a list of length ClothesCount
+		//List[i] is the recomendation value for PeaceOfClothing[i]
+		//Each parameter gives its recommendation, the final decision is made in the TryComputePredictions method 
 
 		private List<int> HeighToWeight(object value)
 		{
