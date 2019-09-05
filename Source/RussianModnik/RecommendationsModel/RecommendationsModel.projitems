@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DataManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MathLogic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MathModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ParameterExtractor.cs" />
   </ItemGroup>

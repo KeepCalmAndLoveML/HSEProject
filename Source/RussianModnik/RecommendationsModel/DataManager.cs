@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Xml.Linq;
+using System.IO;
 
+using Xamarin.Essentials;
 
 namespace RecommendationsModel
 {
@@ -18,24 +20,21 @@ namespace RecommendationsModel
 		public static bool IsDocumentLoaded => LastDocument != null && !IsDocumentLoading;
 
 		public static bool IsDocumentLoading { get; private set; }
-		//This will probably have a switch statement which would depend on the platform
-		private static bool LoadDocument()
+
+		public async static void LoadDocument()
 		{
 			IsDocumentLoading = true;
-			bool result;
-			try
+			string path = Path.Combine(FileSystem.AppDataDirectory, "settings.xml");
+			if (!File.Exists(path))
 			{
-				LastDocument = XDocument.Load("path");
-				result = true;
-			}
-			catch (Exception e)
-			{
-				System.Diagnostics.Debug.WriteLine(e.Message);
-				result = false;
+				//Create File with default root
+				File.WriteAllText(path, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Params>\n\n</Params>");
 			}
 
+			LastDocument = XDocument.Load(path);
+
 			IsDocumentLoading = false;
-			return result;
+			System.Diagnostics.Debug.WriteLine("done");
 		}
 
 		public static List<string> GetValue(Queue<DataPathElement> query)
@@ -183,9 +182,7 @@ namespace RecommendationsModel
 			}
 		}
 
-		public static Task<bool> TryReloadXml() => Task.Run(() => LoadDocument());
-
-		public static Task SaveXml() => Task.Run(() => LastDocument.Save(Program.PathToXml));
+		public static Task SaveXml() => Task.Run(() => LastDocument.Save(Path.Combine(FileSystem.AppDataDirectory, "settings.xml")));
 
 		public enum DataType
 		{

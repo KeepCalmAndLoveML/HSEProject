@@ -9,13 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianModnik.Android", "Ru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianModnik.iOS", "RussianModnik\RussianModnik.iOS\RussianModnik.iOS.csproj", "{0E5FAE12-64DE-4835-83E7-E5E4C9FF61A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianModnik", "RussianModnik\RussianModnik\RussianModnik.csproj", "{18FBC075-8AA6-4124-A42D-F658988D7729}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RussianModnik", "RussianModnik\RussianModnik\RussianModnik.csproj", "{18FBC075-8AA6-4124-A42D-F658988D7729}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RecommendationsModel", "RecommendationsModel\RecommendationsModel.shproj", "{9F83A59A-458D-4195-BA74-98F8B9D61237}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		RecommendationsModel\RecommendationsModel.projitems*{0e5fae12-64de-4835-83e7-e5e4c9ff61a6}*SharedItemsImports = 4
 		RecommendationsModel\RecommendationsModel.projitems*{9f83a59a-458d-4195-ba74-98f8b9d61237}*SharedItemsImports = 13
+		RecommendationsModel\RecommendationsModel.projitems*{abc1a337-c423-49b7-a572-5525bd7ac6cd}*SharedItemsImports = 4
+		RecommendationsModel\RecommendationsModel.projitems*{f6f9509f-433a-4d6f-ada1-bf2a2f626e58}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

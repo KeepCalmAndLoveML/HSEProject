@@ -17,7 +17,7 @@ namespace MathModelDemo
 			MediumGood = 4,
 			Default = 3,
 			MediumBad = 2,
-			VeryBad = 1
+			VeryBad = 1, 
 		}
 
 		#region Parameter functions

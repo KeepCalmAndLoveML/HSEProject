@@ -7,6 +7,8 @@ namespace RecommendationsModel
 {
 	public abstract class MathModel
 	{
+		protected int ClothesCount;
+
 		protected enum WeightValue
 		{
 			VeryGood = 5,
@@ -16,7 +18,7 @@ namespace RecommendationsModel
 			VeryBad = 1
 		}
 
-		protected readonly List<Func<object, List<double>>> ParamFunctions;
+		protected List<Func<object, List<double>>> ParamFunctions;
 		protected readonly List<double> ParamWeights;
 
 		public bool TryComputePredictions(IParameterExtractor extractor, out List<double> Predictions)
@@ -26,7 +28,7 @@ namespace RecommendationsModel
 			if (ParamFunctions.Count != extractor.ParamsCount)
 				throw new ArgumentException("Extractor doesn't combine with model");
 
-			var functionResults = new List<List<int>>();
+			var functionResults = new List<List<double>>();
 			for (int index = 0; index < extractor.ParamsCount; index++)
 			{
 				object pValue;
@@ -110,7 +112,7 @@ namespace RecommendationsModel
 
 		private List<double> HeightToWeight(object value)
 		{
-
+			return null;
 		}
 
 		#endregion

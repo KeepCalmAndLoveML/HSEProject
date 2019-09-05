@@ -139,4 +139,5 @@
       <Name>RussianModnik</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\..\RecommendationsModel\RecommendationsModel.projitems" Label="Shared" />
 </Project>

@@ -3,6 +3,8 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using RecommendationsModel;
+
 namespace RussianModnik.Views
 {
 	// Learn more about making custom code visible in the Xamarin.Forms previewer
@@ -12,7 +14,16 @@ namespace RussianModnik.Views
 	{
 		public MainPage()
 		{
+			DataManager.LoadDocument();
+
 			InitializeComponent();
+
+			while(!DataManager.IsDocumentLoaded)
+			{
+				System.Threading.Thread.Sleep(10);
+			}
+
+			DataManager.SaveXml();
 		}
 	}
 }
