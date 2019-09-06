@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
+using System.Diagnostics;
+
 namespace RecommendationsModel
 {
 	public abstract class MathModel
 	{
-		protected int ClothesCount;
+		protected readonly int ClothesCount;
 
 		protected enum WeightValue
 		{
@@ -19,7 +21,12 @@ namespace RecommendationsModel
 		}
 
 		protected List<Func<object, List<double>>> ParamFunctions;
-		protected readonly List<double> ParamWeights;
+		protected List<double> ParamWeights;
+
+		public MathModel(int cnt)
+		{
+			ClothesCount = cnt;
+		}
 
 		public bool TryComputePredictions(IParameterExtractor extractor, out List<double> Predictions)
 		{
@@ -58,7 +65,7 @@ namespace RecommendationsModel
 
 	public class WomenMathModel : MathModel
 	{
-		public const int ClothesCount = 8 + 4 + 2; //Аксессуарный ряд + 8
+		public const int WomenClothesCount = 8 + 4 + 2; //Аксессуарный ряд + 8
 
 		private readonly string[] Clothes = new string[]
 		{
@@ -70,59 +77,114 @@ namespace RecommendationsModel
 		//This will be set on construction
 		public readonly Dictionary<string, int> ClothesIndices;
 
+		//Quick helper functions
+		private List<double> DefautResult() => Enumerable.Repeat((double)WeightValue.Default, ClothesCount).ToList();
+
+		private void SetValue(List<double> lst, string clothing, WeightValue value)
+		{
+			if (ClothesIndices.ContainsKey(clothing))
+				lst[ClothesIndices[clothing]] = (double)value;
+			else
+				Debug.WriteLine($"WARNING: Unkown clothing piece: {clothing}");
+		}
+
+
 		#region ParamFunctions
 
 		private List<double> BodyType(object value)
 		{
-			string name = value.ToString();
+			List<double> res = DefautResult();
 
+			string name = value.ToString();
+			
 			switch (name)
 			{
 				case "Песочные часы":
+					SetValue(res, "Балахоны", WeightValue.VeryBad);
+
+					SetValue(res, "Платье", WeightValue.MediumGood);
+					SetValue(res, "Юбка", WeightValue.MediumGood);
+
+					SetValue(res, "Блузка", WeightValue.VeryGood);
 					break;
 				case "Треугольник (Груша)":
+					SetValue(res, "Платье", WeightValue.MediumBad);
+
+					SetValue(res, "Жакет", WeightValue.MediumGood);
+					SetValue(res, "Футболка", WeightValue.MediumGood);
+					SetValue(res, "Рубашка", WeightValue.MediumGood);
+					SetValue(res, "Брюки", WeightValue.MediumGood);
+
+					SetValue(res, "Блузка", WeightValue.VeryGood);
+					SetValue(res, "Юбка", WeightValue.VeryGood);
 					break;
 				case "Перевернутый треугольник":
+					SetValue(res, "Жакет", WeightValue.MediumBad);
+
+					SetValue(res, "Юбка", WeightValue.MediumGood);
+					SetValue(res, "Брюки", WeightValue.MediumGood);
 					break;
 				case "Прямоугольник":
+					SetValue(res, "Юбка", WeightValue.MediumGood);
+					SetValue(res, "Брюки", WeightValue.MediumGood);
+					SetValue(res, "Однобортный жакет", WeightValue.MediumGood);
 					break;
 				case "Круг":
+					SetValue(res, "Брюки", WeightValue.MediumGood);
+					SetValue(res, "Жакет", WeightValue.MediumGood);
+					break;
+				default:
+					Debug.WriteLine($"WARNING: Unknown body type: {name}");
 					break;
 			}
 
-			return null;
+			return res;
 		}
 
 		private List<double> Height(object value)
 		{
+			List<double> res = DefautResult();
+
 			double height = (double)value;
 
 			if (height < 165.0) //Низкий рост
 			{
+				SetValue(res, "Брюки", WeightValue.MediumGood);
 
+				SetValue(res, "Жилет", WeightValue.VeryGood);
 			}
 
 			if (height > 175.0) //Высокий рост 
 			{
+				SetValue(res, "Жакет", WeightValue.MediumGood);
+				SetValue(res, "Юбка", WeightValue.MediumGood);
 
+				SetValue(res, "Брюки", WeightValue.VeryGood);
 			}
 
-			return null;
+			return res;
 		}
 
 		private List<double> HeightToWeight(object value)
 		{
-			return null;
+			var res = DefautResult();
+
+			//Do Something here...
+
+			return res;
 		}
 
 		#endregion
 
-		public WomenMathModel()
+		public WomenMathModel() : base(WomenClothesCount)
 		{
 			ClothesIndices = Clothes.Zip(Enumerable.Range(0, ClothesCount), (str, num) => new { key = str, value = num })
 				.ToDictionary(x => x.key, x => x.value);
 
-			ParamFunctions = new List<Func<object, List<double>>>() { BodyType };
+			ParamFunctions = new List<Func<object, List<double>>>() { BodyType, Height, HeightToWeight };
+
+			//Let all weights sum up to 1
+			ParamWeights = new List<double>() { 0.7, 0.15, 0.25 };
 		}
 	}
 }

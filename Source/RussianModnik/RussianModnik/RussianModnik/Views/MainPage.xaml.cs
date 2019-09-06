@@ -14,16 +14,7 @@ namespace RussianModnik.Views
 	{
 		public MainPage()
 		{
-			DataManager.LoadDocument();
-
 			InitializeComponent();
-
-			while(!DataManager.IsDocumentLoaded)
-			{
-				System.Threading.Thread.Sleep(10);
-			}
-
-			DataManager.SaveXml();
 		}
 	}
 }
