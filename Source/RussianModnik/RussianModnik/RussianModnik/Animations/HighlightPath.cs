@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 using Xamarin.Forms;
@@ -8,22 +7,15 @@ using Xamarin.Forms;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 
-namespace FormsPrototype.Animations
+namespace RussianModnik.Animations
 {
-	//TODO: Try replacing arcs around buttons by lines (maybe make this a setting?)
 	class HighlightPath
 	{
-		//The highlighter will higlight elements with types that inherit from those in this list
-		//TODO: Adjust these
 		public static readonly List<Type> AllowedUITypes = new List<Type>()
 		{
 			typeof(Button),
 			typeof(Entry),
-			typeof(BoxView),
-			typeof(Image),
 			typeof(Picker),
-			typeof(ImageButton),
-			typeof(Grid),
 		};
 
 		//StrokeDashMap[Id] -> StrokeDash
@@ -58,15 +50,15 @@ namespace FormsPrototype.Animations
 
 			strokeWidth = (float)skCanvasView.FromPixels(new Point(0, strokeWidth)).Y;
 
-			foreach(View view in layoutChildren)
+			foreach (View view in layoutChildren)
 			{
 				int dashCount = highlightPath.DashCount;
 				Rectangle viewBounds = skCanvasView.FromPixels(view.Bounds);
 
-				if(!AllowedUITypes.Contains(view.GetType()))
+				if (!AllowedUITypes.Contains(view.GetType()))
 					continue;
 
-				if(path.Points.Length == 0)
+				if (path.Points.Length == 0)
 				{
 					// Move path point at the left and below of the view
 					path.MoveTo(
@@ -78,7 +70,7 @@ namespace FormsPrototype.Animations
 				float yCurr = path.LastPoint.Y;
 
 				// Add arch for views except first one
-				if(dashCount > 0)
+				if (dashCount > 0)
 				{
 					float d = dashCount % 2 == 0 ? -1 : 1;
 					float arcHeight = (float)viewBounds.Y + (float)viewBounds.Height - path.LastPoint.Y + (float)strokeWidth / 2;
@@ -90,9 +82,9 @@ namespace FormsPrototype.Animations
 				// Add line below the view
 				// If it's not the first view, the start point is the end from arc end point 
 				// and line direction is either to view start or view end
-				path.LineTo((float)viewBounds.X + (float)viewBounds.Width * ( dashCount % 2 == 0 ? 1 : 0 ), path.LastPoint.Y);
+				path.LineTo((float)viewBounds.X + (float)viewBounds.Width * (dashCount % 2 == 0 ? 1 : 0), path.LastPoint.Y);
 
-				if(view is Button || view is BoxView)
+				if (view is Button || view is BoxView)
 				{
 					xCurr = path.LastPoint.X;
 					yCurr = path.LastPoint.Y;
@@ -126,7 +118,7 @@ namespace FormsPrototype.Animations
 			// Compute the 2nd value of interval, which is the length of remaining path
 			float pathLength = new SKPathMeasure(path).Length;
 
-			for(int i = 0; i < highlightPath.DashCount; ++i)
+			for (int i = 0; i < highlightPath.DashCount; ++i)
 			{
 				StrokeDash d = highlightPath.GetDash(i);
 				d.Intervals[1] = pathLength - d.Intervals[0];

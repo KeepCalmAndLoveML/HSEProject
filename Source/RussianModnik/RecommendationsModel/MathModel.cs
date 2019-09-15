@@ -67,11 +67,17 @@ namespace RecommendationsModel
 	{
 		public const int WomenClothesCount = 8 + 4 + 2; //Аксессуарный ряд + 8
 
-		private readonly string[] Clothes = new string[]
+		public static readonly string[] Clothes = new string[]
 		{
 			"Жакет", "Кардиган", "Жилет", "Платье", "Рубашка",
 			"Футболка", "Топ", "Туника", "Брюки", "Джинсы", "Юбка",
 			"Шорты", "Туфли", "Удобная убовь"
+		};
+
+		public static readonly string[] WomenBodyTypes = new string[]
+		{
+			"Песочные часы", "Треугольник (Груша)", "Перевернутый треугольник",
+			"Прямоугольник", "Яблоко"
 		};
 
 		//This will be set on construction
@@ -130,6 +136,7 @@ namespace RecommendationsModel
 					SetValue(res, "Однобортный жакет", WeightValue.MediumGood);
 					break;
 				case "Круг":
+				case "Яблоко":
 					SetValue(res, "Брюки", WeightValue.MediumGood);
 					SetValue(res, "Жакет", WeightValue.MediumGood);
 					break;

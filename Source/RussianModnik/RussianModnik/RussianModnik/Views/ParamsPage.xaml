@@ -2,13 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:skiaSharp="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-			 xmlns:custom="clr-namespace:FormsPrototype.CustomControls;assembly=FormsPrototype"
-			 xmlns:image="clr-namespace:FormsPrototype.Images"
-			 xmlns:views="clr-namespace:FormsPrototype.Views"
-             x:Class="FormsPrototype.Views.ParamsPage"
+			 xmlns:local="clr-namespace:RussianModnik.ViewModels"
+			 xmlns:custom="clr-namespace:RussianModnik.CustomControls;assembly=RussianModnik"
+			 xmlns:image="clr-namespace:RussianModnik.Images"
+			 xmlns:views="clr-namespace:RussianModnik.Views"
+             x:Class="RussianModnik.Views.ParamsPage"
 			 Title="{Binding Title}">
 	<ContentPage.Resources>
 		<ResourceDictionary>
+			<local:BTypeNameToDescriptionConverter x:Key="BTypeNameToDescription"/>
 			<!--TODO: Find more suitable colors -->
 			<Color x:Key="LightBlack">#333333</Color>
 			<Style TargetType="Label">
@@ -53,23 +55,22 @@
 							</StackLayout.Resources>
 
 							<!-- Basic info -->
-							<Label Text="Height" Margin="3, 0, 0, 0"/>
-							<Entry Placeholder="Sample Height" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
+							<Label Text="Рост" Margin="3, 0, 0, 0"/>
+							<Entry Placeholder="Ваш рост" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
 
-							<Label Text="Weight" Margin="3, 15, 0, 0"/>
-							<Entry Placeholder="Sample Weight" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
-
+							<Label Text="Вес" Margin="3, 15, 0, 0"/>
+							<Entry Placeholder="Ваш вес" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
+							
 							<Picker x:Name="GenderPicker" Title="Gender" SelectedIndex="0" Margin="3, 25, 0, 0" 
-									Focused="PickerFocused" SelectedIndexChanged="GenderPicker_SelectedIndexChanged"
+									SelectedIndexChanged="GenderPicker_SelectedIndexChanged"
 									BackgroundColor="{StaticResource White}" TitleColor="{StaticResource Dark}">
 								<Picker.Items>
-									<x:String>Man</x:String>
 									<x:String>Woman</x:String>
 								</Picker.Items>
 							</Picker>
 
 							<StackLayout Orientation="Horizontal" Padding="5" Margin="3, 15, 0, 0">
-								<Label Text="Show body type definitions" FontSize="16" FontAttributes="Bold" 
+								<Label Text="Показать характеристики типов фигур" FontSize="16" FontAttributes="Bold" 
 									   HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
 									VerticalOptions="Center" TextColor="{StaticResource Black}"/>
 
@@ -88,7 +89,7 @@
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*"/>
 								</Grid.ColumnDefinitions>
-								
+
 								<!-- Horizontal List View -->
 								<StackLayout Padding="0" Grid.Row="0">
 									<RelativeLayout Margin="0, 45, 0, 0" Padding="0" BackgroundColor="Transparent" IsClippedToBounds="True">
@@ -96,12 +97,12 @@
 											<Style TargetType="ListView">
 												<Setter Property="RowHeight">
 													<Setter.Value>
-														<OnPlatform iOS="150" UWP="300"/>
+														<OnPlatform iOS="150"/>
 													</Setter.Value>
 												</Setter>
 												<Setter Property="WidthRequest">
 													<Setter.Value>
-														<OnPlatform iOS="250" UWP="450"/>
+														<OnPlatform iOS="250"/>
 													</Setter.Value>
 												</Setter>
 											</Style>
@@ -125,7 +126,7 @@
 																</Grid.RowDefinitions>
 																<Label Text="{Binding Name}" Grid.Row="0"
 															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-																<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.eye_one.png}"
+																<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=RussianModnik.Images.eye_one.png}"
 																	   WidthRequest="128" HeightRequest="64"/>
 																<Label Text="{Binding Description}" Grid.Row="2" FontSize="Micro"
 															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
@@ -143,10 +144,10 @@
 										<ColumnDefinition Width="13*"/>
 										<ColumnDefinition Width="8*"/>
 									</Grid.ColumnDefinitions>
-									
-									<Label Grid.Column="0" Text="You chose: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-									
-									<!--Make sure this is the same as the list view--> 
+
+									<Label Grid.Column="0" Text="Вы выбрали: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+
+									<!--Make sure this is the same as the list view-->
 									<Frame x:Name="ChoosenEyeFrame" Grid.Column="1" Padding="0" Margin="3, 15, 0, 0" BackgroundColor="Transparent" HasShadow="False">
 										<Frame.Content>
 											<Grid Padding="10" HeightRequest="100">
@@ -158,7 +159,7 @@
 												</Grid.RowDefinitions>
 												<Label Text="{Binding ChosenEyeOption.Name}" Grid.Row="0"
 															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-												<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.eye_one.png}"
+												<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=RussianModnik.Images.eye_one.png}"
 														WidthRequest="128" HeightRequest="64"/>
 												<Label Text="{Binding ChosenEyeOption.Description}" Grid.Row="2" FontSize="Micro"
 															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
@@ -166,60 +167,9 @@
 										</Frame.Content>
 									</Frame>
 								</Grid>
-							</Grid>  
-							
-							<!-- Choosing body type -->
-							<Grid x:Name="MenBodyTypeGrid" Padding="0" ColumnSpacing="10" RowSpacing="10" Margin="0, 10, 0, 0">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="384"/>
-									<RowDefinition Height="384"/>
-									<RowDefinition Height="384"/>
-									<RowDefinition Height="384"/>
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*"/>
-								</Grid.ColumnDefinitions>
-								
-								<Frame HasShadow="False" BackgroundColor="Transparent"
-								   Padding="1" CornerRadius="5" BorderColor="Transparent">
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*"/>
-											<ColumnDefinition Width="0.5"/>
-											<ColumnDefinition Width="*"/>
-										</Grid.ColumnDefinitions>
-
-										<StackLayout Orientation="Vertical" Grid.Column="0" Padding="5">
-											<Label Text="Title" FontSize="24" TextColor="Black"
-												   HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0, 0, 0, 10"/>
-											<ScrollView Orientation="Vertical">
-												<Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et nisi id neque posuere pulvinar eget in dui. Vivamus sed sollicitudin ligula, non pharetra justo. Aliquam erat volutpat."
-												   FontSize="14" LineBreakMode="WordWrap" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
-											</ScrollView>
-										</StackLayout>
-
-										<BoxView Grid.Column="1" Color="Transparent"/>
-										
-										<ImageButton x:Name="MBodyImage" IsVisible="{Binding GenderIsMan}" Aspect="AspectFit" 
-										 HorizontalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="380" WidthRequest="145"
-										 Source="{image:EmbeddedImage RessourceId=FormsPrototype.Images.mbt_one.png}"/>
-									</Grid>
-								</Frame>
-
-								<views:BodyTypeView Grid.Row="1" Title="Title"
-													Description="Will this actually work?"
-													ImageRessourceId="mbt_one.png">
-								</views:BodyTypeView>
-
-								<Frame Grid.Row="2" BorderColor="Black">
-
-								</Frame>
-								
-								<Frame Grid.Row="3" BorderColor="Black">
-
-								</Frame>
 							</Grid>
-
+							
+							<!-- Body types -->
 							<Grid x:Name="WomenBodyTypeGrid" Padding="0" ColumnSpacing="10" RowSpacing="10" Margin="0, 10, 0, 0">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="384"/>
@@ -231,17 +181,43 @@
 									<ColumnDefinition Width="*"/>
 								</Grid.ColumnDefinitions>
 
-								<views:BodyTypeView Title="Woman" Description="Ah shit! Here we go again"
-													ImageRessourceId="wbt_one.png">
+								<Grid.Resources>
+									<ResourceDictionary>
+										<x:String x:Key="BT1">Песочные часы</x:String>
+										<x:String x:Key="BT2">Треугольник (Груша)</x:String>
+										<x:String x:Key="BT3">Перевернутый треугольник</x:String>
+										<x:String x:Key="BT4">Прямоугольник</x:String>
+										<x:String x:Key="BT5">Яблоко</x:String>
+									</ResourceDictionary>
+								</Grid.Resources>
+
+								<views:BodyTypeView Title="Песочные часы" FormattedDescription="{Binding Source={StaticResource BT1}, Converter={StaticResource BTypeNameToDescription}}"
+													ImageRessourceId="BodyTypes.wbt_one.png">
+								</views:BodyTypeView>
+
+								<views:BodyTypeView Grid.Row="1" Title="Треугольник (Груша)" FormattedDescription="{Binding Source={StaticResource BT2}, Converter={StaticResource BTypeNameToDescription}}"
+													ImageRessourceId="BodyTypes.wbt_two.png">
+								</views:BodyTypeView>
+
+								<views:BodyTypeView Grid.Row="2" Title="Прямоугольник" FormattedDescription="{Binding Source={StaticResource BT3}, Converter={StaticResource BTypeNameToDescription}}"
+													ImageRessourceId="BodyTypes.wbt_three.png">
+								</views:BodyTypeView>
+
+								<views:BodyTypeView Grid.Row="3" Title="Перевернутый треугольник" FormattedDescription="{Binding Source={StaticResource BT4}, Converter={StaticResource BTypeNameToDescription}}"
+													ImageRessourceId="BodyTypes.wbt_four.png">
+								</views:BodyTypeView>
+
+								<views:BodyTypeView Grid.Row="4" Title="Яблоко" FormattedDescription="{Binding Source={StaticResource BT5}, Converter={StaticResource BTypeNameToDescription}}"
+													ImageRessourceId="BodyTypes.wbt_five.png">
 								</views:BodyTypeView>
 							</Grid>
 							
-							<Picker x:Name="BodyTypePicker" SelectedIndex="0" Title="Choose your body Type"
+							<Picker x:Name="BodyTypePicker" SelectedIndex="0" Title="Выберите ваш тип фигуры: "
 									ItemsSource="{Binding BodyTypeNames}" Margin="3, 25, 0, 0">
-				
+
 							</Picker>
 
-							<Button x:Name="FinishButton" Text="Update recommendations" Clicked="FinishButton_Clicked" Margin="0, 15, 0, 0"/>
+							<Button x:Name="FinishButton" Text="Начать расчёты" Clicked="FinishButton_Clicked" Margin="0, 15, 0, 0"/>
 						</StackLayout>
 					</Grid>
 				</StackLayout>

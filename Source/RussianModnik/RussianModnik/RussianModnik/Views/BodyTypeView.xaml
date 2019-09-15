@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:images="clr-namespace:RussianModnik.Images"
+			 xmlns:control="clr-namespace:RussianModnik.Views"
+             mc:Ignorable="d"
+             x:Class="RussianModnik.Views.BodyTypeView"
+			 x:Name="this">
+	<ContentView.Resources>
+	</ContentView.Resources>
+	<ContentView.Content>
+		<Frame HasShadow="False" BackgroundColor="Transparent"
+			Padding="1" CornerRadius="5" BorderColor="Transparent">
+
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="0.5"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<StackLayout Orientation="Vertical" Grid.Column="0" Padding="5">
+					<Label Text="{Binding Title, Source={x:Reference this}}" FontSize="24" TextColor="{StaticResource Black}" 
+						HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0, 0, 0, 10"/>
+					<ScrollView Orientation="Vertical">
+						<Label x:Name="DescriptionLabel" FormattedText="{Binding FormattedDescription, Source={x:Reference this}}"
+							FontSize="16" LineBreakMode="WordWrap" TextColor="{StaticResource Black}" 
+							   HorizontalOptions="Center" VerticalOptions="Center"/>
+					</ScrollView>
+				</StackLayout>
+
+				<BoxView Grid.Column="1" Color="Transparent" BackgroundColor="Transparent"/>
+
+				<Image x:Name="MBodyImage" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" Grid.Column="2"
+					   Source="{Binding RealRessourceId, Source={x:Reference this}}" HeightRequest="380" WidthRequest="145"/>
+			</Grid>
+		</Frame>
+	</ContentView.Content>
+</ContentView>

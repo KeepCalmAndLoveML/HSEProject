@@ -10,8 +10,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\BodyTypes\wbt_five.png" />
+    <None Remove="Images\BodyTypes\wbt_four.png" />
+    <None Remove="Images\BodyTypes\wbt_one.png" />
+    <None Remove="Images\BodyTypes\wbt_three.png" />
+    <None Remove="Images\BodyTypes\wbt_two.png" />
+    <None Remove="Images\eye_one.png" />
+    <None Remove="Images\wbt_one.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\BodyTypes\wbt_three.png" />
+    <EmbeddedResource Include="Images\BodyTypes\wbt_four.png" />
+    <EmbeddedResource Include="Images\BodyTypes\wbt_one.png" />
+    <EmbeddedResource Include="Images\BodyTypes\wbt_two.png" />
+    <EmbeddedResource Include="Images\BodyTypes\wbt_five.png" />
+    <EmbeddedResource Include="Images\eye_one.png" />
+    <EmbeddedResource Include="Images\wbt_one.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Skiasharp" Version="1.68.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\BodyTypeView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ParamsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <Import Project="..\..\RecommendationsModel\RecommendationsModel.projitems" Label="Shared" />

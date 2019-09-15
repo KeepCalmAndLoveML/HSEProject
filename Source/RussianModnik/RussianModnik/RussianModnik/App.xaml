@@ -3,18 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:images="clr-namespace:RussianModnik.Images"
              mc:Ignorable="d"
              x:Class="RussianModnik.App">
 
-    <Application.Resources>
-        <ResourceDictionary>
-            <!--Global Styles-->
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
-            <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="BarTextColor" Value="White" />
-            </Style>
-        </ResourceDictionary>
-    </Application.Resources>
-    
+	<Application.Resources>
+		<ResourceDictionary>
+			<!--Global Styles-->
+			<Color x:Key="NavigationPrimary">#272A44</Color>
+			<Color x:Key="White">#FFFFFF</Color>
+			<Color x:Key="Black">#000000</Color>
+			<Color x:Key="AsphaltPrimary">#365271</Color>
+			<Color x:Key="AsphaltDark">#1C2B39</Color>
+			<Color x:Key="GrayPrimary">#ADB7BE</Color>
+
+			<Color x:Key="BackgroundLightBlue">#A6B1E1</Color>
+			<Color x:Key="Dark">#272A44</Color>
+
+			<Style TargetType="NavigationPage">
+				<Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+				<Setter Property="BarTextColor" Value="{StaticResource White}" />
+			</Style>
+
+			<images:EmbeddedImageConverter x:Key="ImageConverter"/>
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>

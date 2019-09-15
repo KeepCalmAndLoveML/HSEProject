@@ -41,7 +41,7 @@ namespace RecommendationsModel
 
 	public class WomenParameterExtractor : ParameterExtractor
 	{
-		public WomenParameterExtractor() : base(WomenMathModel.ClothesCount)
+		public WomenParameterExtractor() : base(WomenMathModel.WomenClothesCount)
 		{
 
 		}
