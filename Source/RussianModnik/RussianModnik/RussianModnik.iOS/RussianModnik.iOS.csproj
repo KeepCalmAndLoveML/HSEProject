@@ -125,6 +125,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
@@ -139,6 +140,24 @@
       <Project>{5F95FBE7-D20C-44D0-A50C-DDAFFCF6E9CD}</Project>
       <Name>RussianModnik</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\download%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\download%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calculations.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calculations%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calculations%403x.png" />
   </ItemGroup>
   <Import Project="..\..\RecommendationsModel\RecommendationsModel.projitems" Label="Shared" />
 </Project>

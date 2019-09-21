@@ -24,7 +24,6 @@
 				<Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
 				<Setter Property="BarTextColor" Value="{StaticResource White}" />
 			</Style>
-
 			<images:EmbeddedImageConverter x:Key="ImageConverter"/>
 		</ResourceDictionary>
 	</Application.Resources>

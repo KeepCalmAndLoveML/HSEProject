@@ -21,10 +21,10 @@ namespace RecommendationsModel
 
 		public static bool IsDocumentLoading { get; private set; }
 
-		public async static void LoadDocument()
+		public async static void LoadDocument(string path)
 		{
 			IsDocumentLoading = true;
-			string path = Path.Combine(FileSystem.AppDataDirectory, "settings.xml");
+			path = Path.Combine(FileSystem.AppDataDirectory, "settings.xml");
 			if (!File.Exists(path))
 			{
 				//Create File with default root
@@ -182,7 +182,7 @@ namespace RecommendationsModel
 			}
 		}
 
-		public static Task SaveXml() => Task.Run(() => LastDocument.Save(Path.Combine(FileSystem.AppDataDirectory, "settings.xml")));
+		public static Task SaveXml(string path) => Task.Run(() => LastDocument.Save(Path.Combine(FileSystem.AppDataDirectory, path)));
 
 		public enum DataType
 		{

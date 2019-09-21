@@ -8,11 +8,57 @@ using System.Windows.Input;
 using RecommendationsModel;
 
 using RussianModnik.Models;
+using RussianModnik.Services;
 
 using Xamarin.Forms;
 
 namespace RussianModnik.ViewModels
 {
+	public class ParameterCollection
+	{
+		private static readonly Dictionary<string, object> DefaultValues = new Dictionary<string, object>()
+		{
+			["Height"] = 175.0,
+			["Weight"] = 55.0,
+			["GenderIsMan"] = false,
+			["BodyType"] = "Песочные часы"
+		};
+
+		public double Height { get; private set; } = (double)DefaultValues["Height"];
+		public double Weight { get; set; } = (double)DefaultValues["Weight"];
+		public bool GenderIsMan { get; set; } = (bool)DefaultValues["GenderIsMan"];
+		public string BodyType { get; set; } = (string)DefaultValues["BodyType"];
+
+		public ParameterCollection()
+		{
+
+		}
+
+		public async void InitializeFrom(ParamsStorage storage)
+		{
+			var items = await storage.GetItemsAsync();
+			foreach(Parameter p in items)
+			{
+				switch (p.Key)
+				{
+					case "Height":
+						Height = (double)p.Value;
+						break;
+					case "Weight":
+						Weight = (double)p.Value;
+						break;
+					case "GenderIsMan":
+						GenderIsMan = (bool)p.Value;
+						break;
+					case "BodyType":
+						BodyType = (string)p.Value;
+						break;
+				}
+			}
+		}
+	}
+
+
 	public class ParamsViewModel : BaseViewModel
 	{
 		private ChooseEyeOption _chosenEyeOption;
@@ -28,6 +74,9 @@ namespace RussianModnik.ViewModels
 				OnPropertyChanged();
 			}
 		}
+
+		public ParameterCollection ParamValues { get; private set; }
+		private ParamsStorage ParamStorage { get; set; }
 
 		public List<string> BodyTypeNames
 		{
@@ -61,6 +110,14 @@ namespace RussianModnik.ViewModels
 			ChosenEyeOption = EyeOptions[0];
 
 			WomanBodyTypes = new ReadOnlyCollection<string>(WomenMathModel.WomenBodyTypes);
+
+			ParamStorage = new ParamsStorage();
+			ParamValues = new ParameterCollection();
+		}
+		
+		public void PopulateParams()
+		{
+			ParamValues.InitializeFrom(ParamStorage);
 		}
 
 		public ICommand ItemClick

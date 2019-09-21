@@ -16,7 +16,6 @@
     <None Remove="Images\BodyTypes\wbt_three.png" />
     <None Remove="Images\BodyTypes\wbt_two.png" />
     <None Remove="Images\eye_one.png" />
-    <None Remove="Images\wbt_one.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +25,6 @@
     <EmbeddedResource Include="Images\BodyTypes\wbt_two.png" />
     <EmbeddedResource Include="Images\BodyTypes\wbt_five.png" />
     <EmbeddedResource Include="Images\eye_one.png" />
-    <EmbeddedResource Include="Images\wbt_one.png" />
   </ItemGroup>
 
   <ItemGroup>

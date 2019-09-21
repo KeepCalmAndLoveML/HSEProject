@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Params>
-    
+	<Parameter Index="0" Value="Песочные часы" Key="BodyType"/>
+    <Parameter Index="1" Value="175" Key="Height"/>
+    <Parameter Index="2" Value="120" Key="HeightToWeight"/>
+    <Parameter Index="3" Value="0" Key="GenderIsMan"/>
 </Params>

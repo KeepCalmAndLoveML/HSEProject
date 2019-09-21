@@ -103,6 +103,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="calculations.png" />
+    <Content Include="download.png" />
     <Content Include="settings.xml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,7 +138,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="xamarin_logo.png" />
-    <Content Include="add.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

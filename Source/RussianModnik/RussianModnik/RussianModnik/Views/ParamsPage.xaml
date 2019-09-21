@@ -34,194 +34,227 @@
 			</Style>
 		</ResourceDictionary>
 	</ContentPage.Resources>
-	<ContentPage.Content>
-		<ScrollView Orientation="Vertical" Padding="0">
-			<Frame BackgroundColor="{StaticResource White}" HasShadow="True" CornerRadius="10" Padding="0">
-				<StackLayout>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
 
-						<skiaSharp:SKCanvasView x:Name="MainCanvasView" 
+	<ContentPage.ToolbarItems>
+		<ToolbarItem x:Name="DownloadItem" Text="Загрузить предыдущие параметры" Order="Secondary" Clicked="DownloadClicked">
+			<ToolbarItem.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="UWP" Value="download.png"/>
+					<On Platform="iOS" Value="download.png"/>
+				</OnPlatform>
+			</ToolbarItem.Icon>
+		</ToolbarItem>
+		<ToolbarItem Text="Провести анализ" Order="Secondary">
+			<ToolbarItem.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="UWP" Value="calculations.png"/>
+					<On Platform="iOS" Value="calculations.png"/>
+				</OnPlatform>
+			</ToolbarItem.Icon>
+		</ToolbarItem>
+	</ContentPage.ToolbarItems>
+
+	<ContentPage.Content>
+		<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+			<ScrollView x:Name="MainView" Orientation="Vertical" Padding="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+				<Frame BackgroundColor="{StaticResource White}" HasShadow="True" CornerRadius="10" Padding="0">
+					<StackLayout>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<skiaSharp:SKCanvasView x:Name="MainCanvasView" 
 										PaintSurface="MainCanvasViewPaintSurfaceRequested"/>
-						<StackLayout x:Name="MainLayout"
+							<StackLayout x:Name="MainLayout"
 							  Padding="30, 25, 30, 20"
                               Orientation="Vertical"
                               Spacing="2">
-							<StackLayout.Resources>
-								<!-- Use BasedOn=BaseStyle for style inheritance-->
+								<StackLayout.Resources>
+									<!-- Use BasedOn=BaseStyle for style inheritance-->
 
-							</StackLayout.Resources>
+								</StackLayout.Resources>
 
-							<!-- Basic info -->
-							<Label Text="Рост" Margin="3, 0, 0, 0"/>
-							<Entry Placeholder="Ваш рост" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
+								<!-- Basic info -->
+								<Label Text="Рост" Margin="3, 0, 0, 0"/>
+								<Entry x:Name="HeightEntry" Placeholder="Ваш рост" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
 
-							<Label Text="Вес" Margin="3, 15, 0, 0"/>
-							<Entry Placeholder="Ваш вес" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
-							
-							<Picker x:Name="GenderPicker" Title="Gender" SelectedIndex="0" Margin="3, 25, 0, 0" 
+								<Label Text="Вес" Margin="3, 15, 0, 0"/>
+								<Entry x:Name="WeightEntry" Placeholder="Ваш вес" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
+
+								<Picker x:Name="GenderPicker" Title="Пол" SelectedIndex="0" Margin="3, 25, 0, 0" 
 									SelectedIndexChanged="GenderPicker_SelectedIndexChanged"
 									BackgroundColor="{StaticResource White}" TitleColor="{StaticResource Dark}">
-								<Picker.Items>
-									<x:String>Woman</x:String>
-								</Picker.Items>
-							</Picker>
+									<Picker.Items>
+										<x:String>Женщина</x:String>
+									</Picker.Items>
+								</Picker>
 
-							<StackLayout Orientation="Horizontal" Padding="5" Margin="3, 15, 0, 0">
-								<Label Text="Показать характеристики типов фигур" FontSize="16" FontAttributes="Bold" 
+								<StackLayout Orientation="Horizontal" Padding="5" Margin="3, 15, 0, 0">
+									<Label Text="Показать характеристики типов фигур" FontSize="16" FontAttributes="Bold" 
 									   HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
 									VerticalOptions="Center" TextColor="{StaticResource Black}"/>
 
-								<BoxView HorizontalOptions="CenterAndExpand" Color="Transparent"/>
+									<BoxView HorizontalOptions="CenterAndExpand" Color="Transparent"/>
 
-								<Switch x:Name="BodyTypeSwitch" IsToggled="True" Toggled="Switch_Toggled"
+									<Switch x:Name="BodyTypeSwitch" IsToggled="True" Toggled="Switch_Toggled"
 										VerticalOptions="Center"/>
-							</StackLayout>
+								</StackLayout>
 
-							<!-- Chooosing eye color -->
-							<Grid x:Name="ChooseEyeColorGrid" RowSpacing="15">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="180"/>
-									<RowDefinition Height="140"/>
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*"/>
-								</Grid.ColumnDefinitions>
+								<!-- Chooosing eye color -->
+								<Grid x:Name="ChooseEyeColorGrid" RowSpacing="15">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="180"/>
+										<RowDefinition Height="140"/>
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
 
-								<!-- Horizontal List View -->
-								<StackLayout Padding="0" Grid.Row="0">
-									<RelativeLayout Margin="0, 45, 0, 0" Padding="0" BackgroundColor="Transparent" IsClippedToBounds="True">
-										<RelativeLayout.Resources>
-											<Style TargetType="ListView">
-												<Setter Property="RowHeight">
-													<Setter.Value>
-														<OnPlatform iOS="150"/>
-													</Setter.Value>
-												</Setter>
-												<Setter Property="WidthRequest">
-													<Setter.Value>
-														<OnPlatform iOS="250"/>
-													</Setter.Value>
-												</Setter>
-											</Style>
-										</RelativeLayout.Resources>
-										<custom:ClickableListView x:Name="EyesListView" Rotation="270" ItemsSource="{Binding EyeOptions}" SeparatorVisibility="None" RowHeight="150"
+									<!-- Horizontal List View -->
+									<StackLayout Padding="0" Grid.Row="0">
+										<RelativeLayout Margin="0, 45, 0, 0" Padding="0" BackgroundColor="Transparent" IsClippedToBounds="True">
+											<RelativeLayout.Resources>
+												<Style TargetType="ListView">
+													<Setter Property="RowHeight">
+														<Setter.Value>
+															<OnPlatform iOS="150"/>
+														</Setter.Value>
+													</Setter>
+													<Setter Property="WidthRequest">
+														<Setter.Value>
+															<OnPlatform iOS="250"/>
+														</Setter.Value>
+													</Setter>
+												</Style>
+											</RelativeLayout.Resources>
+											<custom:ClickableListView x:Name="EyesListView" Rotation="270" ItemsSource="{Binding EyeOptions}" SeparatorVisibility="None" RowHeight="150"
 									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-55}"
 									RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=30}"
 									RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=150}"
 									RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1.2}"
 									BackgroundColor="Transparent" ItemClickCommand="{Binding ItemClick}">
-											<ListView.ItemTemplate>
-												<DataTemplate>
-													<ViewCell>
-														<ContentView  Rotation="90" BackgroundColor="Transparent" Padding="3">
-															<Grid Padding="10" HeightRequest="100" WidthRequest="128">
-																<Grid.RowDefinitions>
-																	<RowDefinition Height="*"/>
-																	<RowDefinition Height="4*"/>
-																	<RowDefinition Height="*"/>
-																	<RowDefinition Height="0.5*"/>
-																</Grid.RowDefinitions>
-																<Label Text="{Binding Name}" Grid.Row="0"
+												<ListView.ItemTemplate>
+													<DataTemplate>
+														<ViewCell>
+															<ContentView  Rotation="90" BackgroundColor="Transparent" Padding="3">
+																<Grid Padding="10" HeightRequest="100" WidthRequest="128">
+																	<Grid.RowDefinitions>
+																		<RowDefinition Height="*"/>
+																		<RowDefinition Height="4*"/>
+																		<RowDefinition Height="*"/>
+																		<RowDefinition Height="0.5*"/>
+																	</Grid.RowDefinitions>
+																	<Label Text="{Binding Name}" Grid.Row="0"
 															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-																<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=RussianModnik.Images.eye_one.png}"
+																	<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=RussianModnik.Images.eye_one.png}"
 																	   WidthRequest="128" HeightRequest="64"/>
-																<Label Text="{Binding Description}" Grid.Row="2" FontSize="Micro"
+																	<Label Text="{Binding Description}" Grid.Row="2" FontSize="Micro"
 															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
-															</Grid>
-														</ContentView>
-													</ViewCell>
-												</DataTemplate>
-											</ListView.ItemTemplate>
-										</custom:ClickableListView>
-									</RelativeLayout>
-								</StackLayout>
-								<Grid Grid.Row="1">
+																</Grid>
+															</ContentView>
+														</ViewCell>
+													</DataTemplate>
+												</ListView.ItemTemplate>
+											</custom:ClickableListView>
+										</RelativeLayout>
+									</StackLayout>
+									<Grid Grid.Row="1">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="5*"/>
+											<ColumnDefinition Width="13*"/>
+											<ColumnDefinition Width="8*"/>
+										</Grid.ColumnDefinitions>
+
+										<Label Grid.Column="0" Text="Вы выбрали: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+
+										<!--Make sure this is the same as the list view-->
+										<Frame x:Name="ChoosenEyeFrame" Grid.Column="1" Padding="0" Margin="3, 15, 0, 0" BackgroundColor="Transparent" HasShadow="False">
+											<Frame.Content>
+												<Grid Padding="10" HeightRequest="100">
+													<Grid.RowDefinitions>
+														<RowDefinition Height="*"/>
+														<RowDefinition Height="4*"/>
+														<RowDefinition Height="*"/>
+														<RowDefinition Height="0.5*"/>
+													</Grid.RowDefinitions>
+													<Label Text="{Binding ChosenEyeOption.Name}" Grid.Row="0"
+															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+													<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=RussianModnik.Images.eye_one.png}"
+														WidthRequest="128" HeightRequest="64"/>
+													<Label Text="{Binding ChosenEyeOption.Description}" Grid.Row="2" FontSize="Micro"
+															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
+												</Grid>
+											</Frame.Content>
+										</Frame>
+									</Grid>
+								</Grid>
+
+								<!-- Body types -->
+								<Grid x:Name="WomenBodyTypeGrid" Padding="0" ColumnSpacing="10" RowSpacing="10" Margin="0, 10, 0, 0">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="384"/>
+										<RowDefinition Height="384"/>
+										<RowDefinition Height="384"/>
+										<RowDefinition Height="384"/>
+									</Grid.RowDefinitions>
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="5*"/>
-										<ColumnDefinition Width="13*"/>
-										<ColumnDefinition Width="8*"/>
+										<ColumnDefinition Width="*"/>
 									</Grid.ColumnDefinitions>
 
-									<Label Grid.Column="0" Text="Вы выбрали: " FontSize="Medium" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+									<Grid.Resources>
+										<ResourceDictionary>
+											<x:String x:Key="BT1">Песочные часы</x:String>
+											<x:String x:Key="BT2">Треугольник (Груша)</x:String>
+											<x:String x:Key="BT3">Перевернутый треугольник</x:String>
+											<x:String x:Key="BT4">Прямоугольник</x:String>
+											<x:String x:Key="BT5">Яблоко</x:String>
+										</ResourceDictionary>
+									</Grid.Resources>
 
-									<!--Make sure this is the same as the list view-->
-									<Frame x:Name="ChoosenEyeFrame" Grid.Column="1" Padding="0" Margin="3, 15, 0, 0" BackgroundColor="Transparent" HasShadow="False">
-										<Frame.Content>
-											<Grid Padding="10" HeightRequest="100">
-												<Grid.RowDefinitions>
-													<RowDefinition Height="*"/>
-													<RowDefinition Height="4*"/>
-													<RowDefinition Height="*"/>
-													<RowDefinition Height="0.5*"/>
-												</Grid.RowDefinitions>
-												<Label Text="{Binding ChosenEyeOption.Name}" Grid.Row="0"
-															   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-												<Image Grid.Row="1" Aspect="AspectFit" Source="{image:EmbeddedImage RessourceId=RussianModnik.Images.eye_one.png}"
-														WidthRequest="128" HeightRequest="64"/>
-												<Label Text="{Binding ChosenEyeOption.Description}" Grid.Row="2" FontSize="Micro"
-															   VerticalTextAlignment="Start"  HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
-											</Grid>
-										</Frame.Content>
-									</Frame>
-								</Grid>
-							</Grid>
-							
-							<!-- Body types -->
-							<Grid x:Name="WomenBodyTypeGrid" Padding="0" ColumnSpacing="10" RowSpacing="10" Margin="0, 10, 0, 0">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="384"/>
-									<RowDefinition Height="384"/>
-									<RowDefinition Height="384"/>
-									<RowDefinition Height="384"/>
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*"/>
-								</Grid.ColumnDefinitions>
-
-								<Grid.Resources>
-									<ResourceDictionary>
-										<x:String x:Key="BT1">Песочные часы</x:String>
-										<x:String x:Key="BT2">Треугольник (Груша)</x:String>
-										<x:String x:Key="BT3">Перевернутый треугольник</x:String>
-										<x:String x:Key="BT4">Прямоугольник</x:String>
-										<x:String x:Key="BT5">Яблоко</x:String>
-									</ResourceDictionary>
-								</Grid.Resources>
-
-								<views:BodyTypeView Title="Песочные часы" FormattedDescription="{Binding Source={StaticResource BT1}, Converter={StaticResource BTypeNameToDescription}}"
+									<views:BodyTypeView Title="Песочные часы" FormattedDescription="{Binding Source={StaticResource BT1}, Converter={StaticResource BTypeNameToDescription}}"
 													ImageRessourceId="BodyTypes.wbt_one.png">
-								</views:BodyTypeView>
+									</views:BodyTypeView>
 
-								<views:BodyTypeView Grid.Row="1" Title="Треугольник (Груша)" FormattedDescription="{Binding Source={StaticResource BT2}, Converter={StaticResource BTypeNameToDescription}}"
+									<views:BodyTypeView Grid.Row="1" Title="Треугольник (Груша)" FormattedDescription="{Binding Source={StaticResource BT2}, Converter={StaticResource BTypeNameToDescription}}"
 													ImageRessourceId="BodyTypes.wbt_two.png">
-								</views:BodyTypeView>
+									</views:BodyTypeView>
 
-								<views:BodyTypeView Grid.Row="2" Title="Прямоугольник" FormattedDescription="{Binding Source={StaticResource BT3}, Converter={StaticResource BTypeNameToDescription}}"
+									<views:BodyTypeView Grid.Row="2" Title="Прямоугольник" FormattedDescription="{Binding Source={StaticResource BT3}, Converter={StaticResource BTypeNameToDescription}}"
 													ImageRessourceId="BodyTypes.wbt_three.png">
-								</views:BodyTypeView>
+									</views:BodyTypeView>
 
-								<views:BodyTypeView Grid.Row="3" Title="Перевернутый треугольник" FormattedDescription="{Binding Source={StaticResource BT4}, Converter={StaticResource BTypeNameToDescription}}"
+									<views:BodyTypeView Grid.Row="3" Title="Перевернутый треугольник" FormattedDescription="{Binding Source={StaticResource BT4}, Converter={StaticResource BTypeNameToDescription}}"
 													ImageRessourceId="BodyTypes.wbt_four.png">
-								</views:BodyTypeView>
+									</views:BodyTypeView>
 
-								<views:BodyTypeView Grid.Row="4" Title="Яблоко" FormattedDescription="{Binding Source={StaticResource BT5}, Converter={StaticResource BTypeNameToDescription}}"
+									<views:BodyTypeView Grid.Row="4" Title="Яблоко" FormattedDescription="{Binding Source={StaticResource BT5}, Converter={StaticResource BTypeNameToDescription}}"
 													ImageRessourceId="BodyTypes.wbt_five.png">
-								</views:BodyTypeView>
-							</Grid>
-							
-							<Picker x:Name="BodyTypePicker" SelectedIndex="0" Title="Выберите ваш тип фигуры: "
+									</views:BodyTypeView>
+								</Grid>
+
+								<Picker x:Name="BodyTypePicker" SelectedIndex="0" Title="Выберите ваш тип фигуры: "
 									ItemsSource="{Binding BodyTypeNames}" Margin="3, 25, 0, 0">
 
-							</Picker>
+								</Picker>
 
-							<Button x:Name="FinishButton" Text="Начать расчёты" Clicked="FinishButton_Clicked" Margin="0, 15, 0, 0"/>
-						</StackLayout>
-					</Grid>
+								<!--<Button x:Name="FinishButton" Text="Произвести расчёты" Clicked="FinishButton_Clicked" Margin="0, 15, 0, 0"/>-->
+							</StackLayout>
+						</Grid>
+					</StackLayout>
+				</Frame>
+			</ScrollView>
+
+			<Frame x:Name="ActivityFrame" Padding="12" AbsoluteLayout.LayoutFlags="PositionProportional"
+             AbsoluteLayout.LayoutBounds="0.4,0.4,-1,-1" BackgroundColor="{StaticResource Black}" IsVisible="False" CornerRadius="5">
+				<StackLayout Spacing="10">
+
+					<ActivityIndicator x:Name="MainIndicator" Color ="{StaticResource White}"/>
+					
+					<Label Text="Загрузка..." HorizontalOptions="Center" FontSize="20" TextColor="{StaticResource White}"/>
+
 				</StackLayout>
 			</Frame>
-		</ScrollView>
+		</AbsoluteLayout>
 	</ContentPage.Content>
 </ContentPage>

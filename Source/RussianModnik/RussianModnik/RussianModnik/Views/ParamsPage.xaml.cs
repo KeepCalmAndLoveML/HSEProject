@@ -49,6 +49,35 @@ namespace RussianModnik.Views
 			);
 		}
 
+		private void DownloadClicked(object sender, EventArgs e)
+		{
+			IsBusy = true;
+			ActivityFrame.IsVisible = true;
+			MainIndicator.IsRunning = true;
+
+			Task.Factory.StartNew(() =>
+			{
+				Task.Delay(5000).Wait();
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					IsBusy = false;
+					ActivityFrame.IsVisible = false;
+					MainIndicator.IsRunning = false;
+				});
+			});
+
+			ViewModel.PopulateParams();
+			
+			HeightEntry.Text = ViewModel.ParamValues.Height.ToString();
+			WeightEntry.Text = ViewModel.ParamValues.Weight.ToString();
+			if (ViewModel.ParamValues.GenderIsMan)
+				GenderPicker.SelectedItem = "Мужчина";
+			else
+				GenderPicker.SelectedItem = "Женщина";
+			BodyTypePicker.SelectedItem = ViewModel.ParamValues.BodyType;
+	
+		}
+
 		public ParamsPage(ParamsViewModel viewModel) : this()
 		{
 			ViewModel = viewModel;
