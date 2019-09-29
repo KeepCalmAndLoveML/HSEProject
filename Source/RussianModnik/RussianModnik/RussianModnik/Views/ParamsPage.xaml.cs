@@ -57,17 +57,21 @@ namespace RussianModnik.Views
 
 			Task.Factory.StartNew(() =>
 			{
-				Task.Delay(5000).Wait();
+				Task.Delay(3000).Wait(); //Show the user something is happening
 				Device.BeginInvokeOnMainThread(() =>
 				{
+					ViewModel.PopulateParams();
+					ShowParams();
+
 					IsBusy = false;
 					ActivityFrame.IsVisible = false;
 					MainIndicator.IsRunning = false;
 				});
 			});
+		}
 
-			ViewModel.PopulateParams();
-			
+		private void ShowParams()
+		{
 			HeightEntry.Text = ViewModel.ParamValues.Height.ToString();
 			WeightEntry.Text = ViewModel.ParamValues.Weight.ToString();
 			if (ViewModel.ParamValues.GenderIsMan)
@@ -75,7 +79,6 @@ namespace RussianModnik.Views
 			else
 				GenderPicker.SelectedItem = "Женщина";
 			BodyTypePicker.SelectedItem = ViewModel.ParamValues.BodyType;
-	
 		}
 
 		public ParamsPage(ParamsViewModel viewModel) : this()

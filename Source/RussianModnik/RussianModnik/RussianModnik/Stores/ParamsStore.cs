@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using RecommendationsModel;
 
-namespace RussianModnik.Services
+namespace RussianModnik.Stores
 {
 	public class Parameter
 	{
@@ -23,22 +23,12 @@ namespace RussianModnik.Services
 		}
 	}
 
-	public class ParamsStorage : IDataStore<Parameter>
+	public class ParamsStore
 	{
-		public ParamsStorage()
+		public ParamsStore()
 		{
 			if (!DataManager.IsDocumentLoaded && !DataManager.IsDocumentLoading)
 				DataManager.LoadDocument(Settings.SettingsFileName);
-		}
-
-		public Task<bool> AddItemAsync(Parameter item)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<bool> DeleteItemAsync(string id)
-		{
-			throw new NotImplementedException();
 		}
 
 		public Task<Parameter> GetItemAsync(string id)
@@ -99,6 +89,8 @@ namespace RussianModnik.Services
 			});
 		}
 
+		//Change Value of a parameter
+		//TODO: Implement this
 		public Task<bool> UpdateItemAsync(Parameter item)
 		{
 			throw new NotImplementedException();

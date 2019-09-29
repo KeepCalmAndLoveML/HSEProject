@@ -8,7 +8,8 @@ using System.Windows.Input;
 using RecommendationsModel;
 
 using RussianModnik.Models;
-using RussianModnik.Services;
+using RussianModnik.Stores;
+
 
 using Xamarin.Forms;
 
@@ -34,7 +35,7 @@ namespace RussianModnik.ViewModels
 
 		}
 
-		public async void InitializeFrom(ParamsStorage storage)
+		public async void InitializeFrom(ParamsStore storage)
 		{
 			var items = await storage.GetItemsAsync();
 			foreach(Parameter p in items)
@@ -76,7 +77,7 @@ namespace RussianModnik.ViewModels
 		}
 
 		public ParameterCollection ParamValues { get; private set; }
-		private ParamsStorage ParamStorage { get; set; }
+		private ParamsStore ParamStorage { get; set; }
 
 		public List<string> BodyTypeNames
 		{
@@ -101,17 +102,17 @@ namespace RussianModnik.ViewModels
 
 			EyeOptions = new List<ChooseEyeOption>()
 			{
-				new ChooseEyeOption { Name="Голубые глаза", Description="Невероятные"},
-				new ChooseEyeOption { Name="Зелёные глаза", Description="Сногсшибательные"},
-				new ChooseEyeOption { Name="Чёрные глаза", Description="Очаровательные"},
-				new ChooseEyeOption { Name="Серые глаза", Description="Мистические"},
+				new ChooseEyeOption { Name="Голубые глаза", Description="Невероятные", ImageRessourceId="Eyes.blue_eyes.png".ToImageRessourceId() },
+				new ChooseEyeOption { Name="Зелёные глаза", Description="Сногсшибательные", ImageRessourceId = "Eyes.green_eyes.png".ToImageRessourceId() },
+				new ChooseEyeOption { Name="Чёрные глаза", Description="Очаровательные", ImageRessourceId = "Eyes.black_eyes.png".ToImageRessourceId() },
+				new ChooseEyeOption { Name="Серые глаза", Description="Мистические", ImageRessourceId = "Eyes.gray_eyes.png".ToImageRessourceId() },
 			};
 
 			ChosenEyeOption = EyeOptions[0];
 
 			WomanBodyTypes = new ReadOnlyCollection<string>(WomenMathModel.WomenBodyTypes);
 
-			ParamStorage = new ParamsStorage();
+			ParamStorage = new ParamsStore();
 			ParamValues = new ParameterCollection();
 		}
 		

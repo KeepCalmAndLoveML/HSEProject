@@ -5,24 +5,48 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:RussianModnik.Views"
-            x:Class="RussianModnik.Views.MainPage">
+            x:Class="RussianModnik.Views.MainPage"
+			BarBackgroundColor="{StaticResource NavigationPrimary}"
+			SelectedTabColor="{StaticResource White}">
 
-    <TabbedPage.Children>
-        <NavigationPage Title="Browse">
+	<TabbedPage.Children>
+		<NavigationPage Title="Верхняя одежда">
+			<NavigationPage.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="iOS" Value="clothes.png"/>
+				</OnPlatform>
+			</NavigationPage.Icon>
+			<x:Arguments>
+				<views:UpperClothingPage/>
+			</x:Arguments>
+		</NavigationPage>
+
+		<NavigationPage Title="Поясная группа">
+			<NavigationPage.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="iOS" Value="pants.png"/>
+				</OnPlatform>
+			</NavigationPage.Icon>
+			<x:Arguments>
+				<views:MiddleClothingPage/>
+			</x:Arguments>
+		</NavigationPage>
+
+		<NavigationPage Title="Обувь">
+			<NavigationPage.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="iOS" Value="shoes.png"/>
+				</OnPlatform>
+			</NavigationPage.Icon>
+			<x:Arguments>
+				<views:ParamsPage/>
+			</x:Arguments>
+		</NavigationPage>
+
+		<NavigationPage Title="Ваши данные">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="iOS" Value="tab_feed.png"/>
-                </OnPlatform>
-            </NavigationPage.Icon>
-            <x:Arguments>
-                <views:ItemsPage />
-            </x:Arguments>
-        </NavigationPage>
-        
-        <NavigationPage Title="Ваши данные">
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_about.png"/>
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>

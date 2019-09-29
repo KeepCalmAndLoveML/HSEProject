@@ -66,6 +66,9 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="no-clothes.json" />
+    <BundleResource Include="walking.json" />
+    <BundleResource Include="working.json" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -131,6 +134,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xam.Plugin.SimpleAppIntro">
+      <Version>1.0.22</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
@@ -158,6 +164,33 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\calculations%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\clothes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\clothes%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\clothes%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shoes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shoes%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shoes%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pants.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pants%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pants%403x.png" />
   </ItemGroup>
   <Import Project="..\..\RecommendationsModel\RecommendationsModel.projitems" Label="Shared" />
 </Project>

@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using RussianModnik.Services;
 using RussianModnik.Views;
+using RussianModnik.Stores;
+
+using RecommendationsModel;
+
+using Xam.Plugin.SimpleAppIntro;
 
 namespace RussianModnik
 {
@@ -13,13 +19,18 @@ namespace RussianModnik
 		{
 			InitializeComponent();
 
-			DependencyService.Register<MockDataStore>();
+			//Load data before anything else
+			//DataManager.LoadDocument(Settings.SettingsFileName);
+
+			UpperClothingStore.MainStore = new UpperClothingStore();
+			MiddleClothingStore.MainStore = new MiddleClothingStore();
+			
 			MainPage = new MainPage();
 		}
 
 		protected override void OnStart()
-		{
-			// Handle when your app starts
+		{ 
+
 		}
 
 		protected override void OnSleep()

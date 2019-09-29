@@ -13,11 +13,6 @@ namespace RussianModnik.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BodyTypeView : ContentView
 	{
-		public readonly static Dictionary<string, string> TitleToRessourceId = new Dictionary<string, string>()
-		{
-			["Title"] = "mbt_one.png",
-		};
-
 		public static readonly BindableProperty ImageResosurceIdProperty = BindableProperty.Create(nameof(ImageRessourceId), typeof(string), typeof(BodyTypeView), default(string));
 		public static readonly BindableProperty DescriptionProperty = BindableProperty.Create(nameof(Description), typeof(string), typeof(BodyTypeView), default(string));
 		public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(BodyTypeView), default(string));
@@ -30,7 +25,7 @@ namespace RussianModnik.Views
 			set
 			{
 				SetValue(TitleProperty, value);
-				Debug.WriteLine(Title);
+				//Debug.WriteLine(Title);
 			}
 		}
 
@@ -52,7 +47,7 @@ namespace RussianModnik.Views
 			set
 			{
 				SetValue(ImageResosurceIdProperty, value);
-				Debug.WriteLine(ImageRessourceId);
+				//Debug.WriteLine(ImageRessourceId);
 				if (!string.IsNullOrEmpty(ImageRessourceId))
 					MBodyImage.Source = ImageSource.FromResource(ImageRessourceId.ToImageRessourceId());
 			}
