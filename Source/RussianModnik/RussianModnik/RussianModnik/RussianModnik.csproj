@@ -33,6 +33,7 @@
     <EmbeddedResource Include="Images\Eyes\gray_eyes.png" />
     <EmbeddedResource Include="Images\Eyes\green_eyes.png" />
     <EmbeddedResource Include="Images\eye_one.png" />
+    <EmbeddedResource Include="Images\UpperClothing\*.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +52,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ParamsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UpperClothingDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UpperClothingPage.xaml">

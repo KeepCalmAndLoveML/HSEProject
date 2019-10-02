@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RussianModnik.Views.UpperClothingDetailPage"
+			 Title="{Binding Title}">
+    <ContentPage.Content>
+		<ScrollView Padding="0">
+			<StackLayout x:Name="MainLayout" Spacing="5" Padding="15">
+				<Label Text="{Binding Title}" FontSize="Large" HorizontalOptions="Center" Margin="25"/>
+
+				<Image x:Name="DetailImage" HeightRequest="128" WidthRequest="256" Margin="0, 0, 0, 25"  
+				   Source="{Binding RessourceIdDetail, Converter={StaticResource ImageConverter}}" Aspect="AspectFit" />
+
+				<!-- Description is questionable for clothes and shoes
+				<Label Text="Description:" FontSize="Medium" />
+				<Label Text="{Binding Item.Description}" FontSize="Small"/>
+				-->
+				<StackLayout Spacing="30" Padding="0" Orientation="Horizontal" Margin="0, 0, 0, 5">
+					<Label Style="{DynamicResource ListItemTextStyle}" Text="Вам подходит: "/>
+					<Label Style="{DynamicResource ListItemDetailTextStyle}" Text="{Binding Item.InternationalSize}"/>
+					<Label Style="{DynamicResource ListItemDetailTextStyle}" Text="{Binding Item.RuSize}"/>
+					<Label Style="{DynamicResource ListItemDetailTextStyle}" Text="{Binding Item.EuSize}"/>
+				</StackLayout>
+
+				<Label FontSize="Small" Text="С этим обычно смотрят:"/>
+
+				<RelativeLayout Margin="0, 65, 0, 0" Padding="0">
+					<RelativeLayout.Resources>
+						<Style TargetType="ListView">
+							<Setter Property="RowHeight">
+								<Setter.Value>
+									<OnPlatform iOS="200" UWP="500"/>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</RelativeLayout.Resources>
+					<ListView x:Name="RelatedListView" Rotation="270" ItemsSource="{Binding RelatedItems}" SeparatorVisibility="None" RowHeight="200"
+									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-120}"
+									RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=30}"
+									RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=200}"
+									RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+									CachingStrategy="RecycleElement">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<ContentView  Rotation="90" BackgroundColor="Transparent">
+										<StackLayout Padding="10">
+											<Label Text="{Binding Title}" 
+							LineBreakMode="NoWrap" 
+							Style="{DynamicResource ListItemTextStyle}" 
+							FontSize="16"
+						HorizontalOptions="Center"/>
+
+											<!--<BoxView BackgroundColor="Gray" HeightRequest="200" Margin="50, 0"/>-->
+
+											<Image HeightRequest="128" WidthRequest="128" Margin="50, 0" HorizontalOptions="Center"
+									   Aspect="AspectFit" Source="{Binding RessourceIdSmall, Converter={StaticResource ImageConverter}}"/>
+										</StackLayout>
+									</ContentView>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</RelativeLayout>
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

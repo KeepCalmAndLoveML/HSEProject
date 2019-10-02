@@ -41,7 +41,6 @@ namespace RussianModnik.Views
 				DoneText = string.Empty
 			};
 
-
 			Navigation.PushModalAsync(WelcomePage);
 		}
 

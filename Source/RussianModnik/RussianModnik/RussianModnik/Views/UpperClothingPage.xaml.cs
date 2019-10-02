@@ -27,7 +27,11 @@ namespace RussianModnik.Views
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-
+			UpperClothing Item;
+			if (ItemsListView.TryGetSelectedItem(args, out Item))
+			{
+				await Navigation.PushAsync(new UpperClothingDetailPage(new UpperClothingDetailViewModel(Item)));
+			}
 		}
 	}
 }

@@ -20,6 +20,8 @@ namespace RussianModnik.Models
 		//The gender that this item fits too
 		public Gender Gender { get; set; } = Gender.Female;
 
+		public string GenderString => this.Gender == Gender.Female ? "Женский пол" : "Мужской пол";
+
 		//Small picture of the item to show in list view
 		public string RessourceIdSmall { get; set; }
 
