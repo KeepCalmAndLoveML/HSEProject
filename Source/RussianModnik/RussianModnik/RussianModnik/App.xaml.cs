@@ -24,6 +24,7 @@ namespace RussianModnik
 
 			UpperClothingStore.MainStore = new UpperClothingStore();
 			MiddleClothingStore.MainStore = new MiddleClothingStore();
+			ShoesStore.MainStore = new ShoesStore();
 			
 			MainPage = new MainPage();
 		}

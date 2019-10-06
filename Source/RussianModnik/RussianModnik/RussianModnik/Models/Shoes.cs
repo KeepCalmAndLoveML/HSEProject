@@ -7,11 +7,11 @@ namespace RussianModnik.Models
 	public class Shoes : ItemBase
 	{
 		//Represents a universal size (foot length in mm)
-		public double Size { get; set; }
+		public double Size { get; set; } = 25;
 
 		public string ShoeSizeUS => ShoeSizeHelper.GetShoeSizeUS(Size, this.Gender);
 		public string ShoeSizeEU => ShoeSizeHelper.GetShoeSizeEU(Size, this.Gender);
-		public string ShoeSizeAsia => ShoeSizeHelper.GetShoeSizeAsia(Size, this.Gender);
+		public string ShoeSizeRu => ShoeSizeHelper.GetShoeSizeRU(Size, this.Gender);
 
 		private static class ShoeSizeHelper
 		{
@@ -93,42 +93,21 @@ namespace RussianModnik.Models
 				return string.Empty;
 			}
 
-			public static string GetShoeSizeAsia(double size, Gender gender)
+			public static string GetShoeSizeRU(double size, Gender gender)
 			{
-				if (gender == Gender.Female)
-				{
-					const double BaseSizeMM = 204;
-					const double Step = 8;
-					const double BaseSizeAsia = 19;
+				const double BaseSizeMM = 225;
+				const double Step = 5;
+				const double BaseSizeRu = 36;
 
-					double asianSize = (size - BaseSizeMM) / Step + BaseSizeAsia;
-					if (Math.Truncate(asianSize) < 0.3)
-						asianSize = Math.Floor(asianSize);
-					else if (Math.Truncate(asianSize) > 0.7)
-						asianSize = Math.Ceiling(asianSize);
-					else
-						asianSize = Math.Floor(asianSize) + 0.5;
+				double russianSize = (size - BaseSizeMM) / Step + BaseSizeRu;
+				if (Math.Truncate(russianSize) < 0.3)
+					russianSize = Math.Floor(russianSize);
+				else if (Math.Truncate(russianSize) > 0.7)
+					russianSize = Math.Ceiling(russianSize);
+				else
+					russianSize = Math.Floor(russianSize) + 0.5;
 
-					return "Asia " + Math.Round(asianSize, 1).ToString();
-				}
-				else if (gender == Gender.Male)
-				{
-					const double BaseSizeMM = 221;
-					const double Step = 8;
-					const double BaseSizeAsia = 22;
-
-					double asianSize = (size - BaseSizeMM) / Step + BaseSizeAsia;
-					if (Math.Truncate(asianSize) < 0.3)
-						asianSize = Math.Floor(asianSize);
-					else if (Math.Truncate(asianSize) > 0.7)
-						asianSize = Math.Ceiling(asianSize);
-					else
-						asianSize = Math.Floor(asianSize) + 0.5;
-
-					return "Asia " + Math.Round(asianSize, 1).ToString();
-				}
-
-				return string.Empty;
+				return "RU " + Convert.ToInt32(russianSize);
 			}
 		}
 	}

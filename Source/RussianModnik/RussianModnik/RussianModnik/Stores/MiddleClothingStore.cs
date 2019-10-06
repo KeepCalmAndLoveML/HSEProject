@@ -21,8 +21,29 @@ namespace RussianModnik.Stores
 				{
 					Id = Guid.NewGuid().ToString(),
 					Title = "Джинсы",
-					RessourceIdSmall = "BodyTypes.wbt_one.png".ToImageRessourceId(),
-					RessourceIdDetail = "BodyTypes.wbt_one.png".ToImageRessourceId(),
+					RessourceIdSmall = "MiddleClothing.jeans.png".ToImageRessourceId(),
+					RessourceIdDetail = "MiddleClothing.jeans2.png".ToImageRessourceId(),
+				},
+				new MiddleClothing()
+				{
+					Id = Guid.NewGuid().ToString(),
+					Title = "Брюки",
+					RessourceIdSmall = "MiddleClothing.pants.png".ToImageRessourceId(),
+					RessourceIdDetail = "MiddleClothing.pants2.png".ToImageRessourceId(),
+				},
+				new MiddleClothing()
+				{
+					Id = Guid.NewGuid().ToString(),
+					Title = "Шорты",
+					RessourceIdSmall = "MiddleClothing.short.png".ToImageRessourceId(),
+					RessourceIdDetail = "MiddleClothing.short2.png".ToImageRessourceId(),
+				},
+				new MiddleClothing()
+				{
+					Id = Guid.NewGuid().ToString(),
+					Title = "Юбка",
+					RessourceIdSmall = "MiddleClothing.skirt.png".ToImageRessourceId(),
+					RessourceIdDetail = "MiddleClothing.skirt2.png".ToImageRessourceId(),
 				},
 			};
 			WomenClothing = new InCodeStore<MiddleClothing>(womenItems);

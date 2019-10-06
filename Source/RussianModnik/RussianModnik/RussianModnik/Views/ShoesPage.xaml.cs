@@ -13,22 +13,24 @@ using RussianModnik.ViewModels;
 namespace RussianModnik.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MiddleClothingPage : ContentPage
+	public partial class ShoesPage : ContentPage
 	{
-		private MiddleClothingViewModel ViewModel;
+		ShoesViewModel ViewModel;
 
-		public MiddleClothingPage()
+		public ShoesPage()
 		{
 			InitializeComponent();
 
-			this.BindingContext = ViewModel = new MiddleClothingViewModel();
+			BindingContext = ViewModel = new ShoesViewModel();
 		}
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			MiddleClothing selected;
-			if (ItemsListView.TryGetSelectedItem(args, out selected))
-				await Navigation.PushAsync(new MiddleClothingDetailPage(new MiddleClothingDetailViewModel(selected)));
+			Shoes Item;
+			if (ItemsListView.TryGetSelectedItem(args, out Item))
+			{
+				//await Navigation.PushAsync(new (new UpperClothingDetailViewModel(Item)));
+			}
 		}
 	}
 }

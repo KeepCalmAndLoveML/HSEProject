@@ -10,6 +10,16 @@
 			SelectedTabColor="{StaticResource White}">
 
 	<TabbedPage.Children>
+		<NavigationPage Title="Ваши данные">
+			<NavigationPage.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="iOS" Value="tab_feed.png"/>
+				</OnPlatform>
+			</NavigationPage.Icon>
+			<x:Arguments>
+				<views:ParamsPage/>
+			</x:Arguments>
+		</NavigationPage>
 		<NavigationPage Title="Верхняя одежда">
 			<NavigationPage.Icon>
 				<OnPlatform x:TypeArguments="FileImageSource">
@@ -39,20 +49,9 @@
 				</OnPlatform>
 			</NavigationPage.Icon>
 			<x:Arguments>
-				<views:ParamsPage/>
+				<views:ShoesPage/>
 			</x:Arguments>
 		</NavigationPage>
-
-		<NavigationPage Title="Ваши данные">
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_feed.png"/>
-                </OnPlatform>
-            </NavigationPage.Icon>
-            <x:Arguments>
-				<views:ParamsPage/>
-			</x:Arguments>
-        </NavigationPage>
-    </TabbedPage.Children>
+	</TabbedPage.Children>
     
 </TabbedPage>

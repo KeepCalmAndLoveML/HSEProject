@@ -20,6 +20,7 @@
     <None Remove="Images\Eyes\gray_eyes.png" />
     <None Remove="Images\Eyes\green_eyes.png" />
     <None Remove="Images\eye_one.png" />
+    <None Remove="Images\MiddleClothing\jeans.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,7 @@
     <EmbeddedResource Include="Images\Eyes\green_eyes.png" />
     <EmbeddedResource Include="Images\eye_one.png" />
     <EmbeddedResource Include="Images\UpperClothing\*.png" />
+    <EmbeddedResource Include="Images\MiddleClothing\*.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,10 +50,16 @@
     <EmbeddedResource Update="Views\BodyTypeView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\MiddleClothingDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\MiddleClothingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ParamsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ShoesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UpperClothingDetailPage.xaml">
