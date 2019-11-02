@@ -11,46 +11,55 @@ using Xamarin.Forms;
 
 namespace RussianModnik.ViewModels
 {
-	public class UpperClothingViewModel : BaseViewModel
-	{
-		public List<UpperClothing> Items { get; set; }
-		public Command LoadItemsCommand { get; set; }
+    public class UpperClothingViewModel : BaseViewModel
+    {
+        public List<UpperClothing> Items { get; set; }
+        public Command LoadItemsCommand { get; set; }
 
-		public UpperClothingViewModel()
-		{
-			Title = "Верхняя одежда";
+        public UpperClothingViewModel()
+        {
+            Title = "Верхняя одежда";
 
-			Items = UpperClothingStore.MainStore.GetItems().ToList();
-			LoadItemsCommand = new Command((obj) => ExecuteLoadItemsCommand(obj as Gender?));
-		}
+            Items = UpperClothingStore.MainStore.GetItems().ToList();
+            LoadItemsCommand = new Command((obj) => ExecuteLoadItemsCommand(obj as Gender?));
 
-		void ExecuteLoadItemsCommand(Gender? gender)
-		{
-			if (!gender.HasValue)
-				gender = Gender.Female;
+            MessagingCenter.Subscribe<ParamsViewModel>(this, "Predictions computed", (ParamsViewModel vm) =>
+            {
+                LoadItemsCommand.Execute(vm.ParamValues.GenderIsMan ? Gender.Male : Gender.Female);
+                foreach (UpperClothing item in Items)
+                {
+                    item.Height = vm.ParamValues.Height;
+                }
+            });
+        }
 
-			if (IsBusy)
-				return;
+        void ExecuteLoadItemsCommand(Gender? gender)
+        {
+            if (!gender.HasValue)
+                gender = Gender.Female;
 
-			IsBusy = true;
+            if (IsBusy)
+                return;
 
-			try
-			{
-				Items.Clear();
-				var items = UpperClothingStore.MainStore.GetItems(gender.Value);
-				foreach (var item in items)
-				{
-					Items.Add(item);
-				}
-			}
-			catch (Exception ex)
-			{
+            IsBusy = true;
 
-			}
-			finally
-			{
-				IsBusy = false;
-			}
-		}
-	}
+            try
+            {
+                Items.Clear();
+                var items = UpperClothingStore.MainStore.GetItemsPref(gender.Value);
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+    }
 }

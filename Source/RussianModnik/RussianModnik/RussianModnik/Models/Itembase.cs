@@ -2,30 +2,33 @@
 
 namespace RussianModnik.Models
 {
-	public abstract class ItemBase
-	{
-		//Convert International size to string
-		public static readonly string[] SizeConversionArray = new string[]
-		{
-			"XS", "S", "M", "L", "XL", "XXL"
-		};
+    public abstract class ItemBase
+    {
+        //Convert International size to string
+        public static readonly string[] SizeConversionArray = new string[]
+        {
+            "XS", "S", "M", "L", "XL", "XXL"
+        };
 
 
-		//Unique Id
-		public string Id { get; set; }
+        //Unique Id
+        public string Id { get; set; }
 
-		public string Title { get; set; } = "Lorem Ipsum";
-		public string Description { get; set; } = "Lorem Ipsum";
+        //Rating Given by Math Model
+        public double Rating { get; set; } = -1;
 
-		//The gender that this item fits too
-		public Gender Gender { get; set; } = Gender.Female;
+        public string Title { get; set; } = "Lorem Ipsum";
+        public string Description { get; set; } = "Lorem Ipsum";
 
-		public string GenderString => this.Gender == Gender.Female ? "Женский пол" : "Мужской пол";
+        //The gender that this item fits too
+        public Gender Gender { get; set; } = Gender.Female;
 
-		//Small picture of the item to show in list view
-		public string RessourceIdSmall { get; set; }
+        public string GenderString => this.Gender == Gender.Female ? "Женский пол" : "Мужской пол";
 
-		//Detailed picture to show in dedicated page
-		public string RessourceIdDetail { get; set; }
-	}
+        //Small picture of the item to show in list view
+        public string RessourceIdSmall { get; set; }
+
+        //Detailed picture to show in dedicated page
+        public string RessourceIdDetail { get; set; }
+    }
 }

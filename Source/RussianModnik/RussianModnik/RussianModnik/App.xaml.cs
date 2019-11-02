@@ -12,36 +12,40 @@ using Xam.Plugin.SimpleAppIntro;
 
 namespace RussianModnik
 {
-	public partial class App : Application
-	{
+    public partial class App : Application
+    {
 
-		public App()
-		{
-			InitializeComponent();
+        public App()
+        {
+            InitializeComponent();
 
-			//Load data before anything else
-			//DataManager.LoadDocument(Settings.SettingsFileName);
+            //Load data before anything else
+            DataManager.LoadDocument(Settings.SettingsFileName);
 
-			UpperClothingStore.MainStore = new UpperClothingStore();
-			MiddleClothingStore.MainStore = new MiddleClothingStore();
-			ShoesStore.MainStore = new ShoesStore();
-			
-			MainPage = new MainPage();
-		}
+            UpperClothingStore.MainStore = new UpperClothingStore();
+            MiddleClothingStore.MainStore = new MiddleClothingStore();
+            ShoesStore.MainStore = new ShoesStore();
 
-		protected override void OnStart()
-		{ 
+            MathLogic.Extractor = new WomenParameterExtractor();
+            MathLogic.Model = new WomenMathModel();
+            MathLogic.Initialize(true);
 
-		}
+            MainPage = new MainPage();
+        }
 
-		protected override void OnSleep()
-		{
-			// Handle when your app sleeps
-		}
+        protected override void OnStart()
+        {
 
-		protected override void OnResume()
-		{
-			// Handle when your app resumes
-		}
-	}
+        }
+
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
+
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        }
+    }
 }

@@ -21,6 +21,7 @@
     <None Remove="Images\Eyes\green_eyes.png" />
     <None Remove="Images\eye_one.png" />
     <None Remove="Images\MiddleClothing\jeans.png" />
+    <None Remove="settings.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,9 @@
     <EmbeddedResource Include="Images\Eyes\gray_eyes.png" />
     <EmbeddedResource Include="Images\Eyes\green_eyes.png" />
     <EmbeddedResource Include="Images\eye_one.png" />
+    <EmbeddedResource Include="settings.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\UpperClothing\*.png" />
     <EmbeddedResource Include="Images\MiddleClothing\*.png" />
   </ItemGroup>

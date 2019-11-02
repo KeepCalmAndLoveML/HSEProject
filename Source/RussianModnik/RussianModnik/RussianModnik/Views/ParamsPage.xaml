@@ -44,7 +44,7 @@
 				</OnPlatform>
 			</ToolbarItem.Icon>
 		</ToolbarItem>
-		<ToolbarItem Text="Провести анализ" Order="Secondary">
+		<ToolbarItem Text="Провести анализ" Order="Secondary" Clicked="CalculateClicked">
 			<ToolbarItem.Icon>
 				<OnPlatform x:TypeArguments="FileImageSource">
 					<On Platform="UWP" Value="calculations.png"/>

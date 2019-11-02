@@ -106,10 +106,6 @@
     <Content Include="calculations.png" />
     <Content Include="clothes.png" />
     <Content Include="download.png" />
-    <Content Include="settings.xml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Content>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />

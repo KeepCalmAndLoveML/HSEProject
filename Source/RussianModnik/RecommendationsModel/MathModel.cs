@@ -39,7 +39,7 @@ namespace RecommendationsModel
 			for (int index = 0; index < extractor.ParamsCount; index++)
 			{
 				object pValue;
-				if (extractor.TryGetValue(index + 1, out pValue))
+				if (extractor.TryGetValue(index, out pValue))
 				{
 					functionResults.Add(ParamFunctions[index].Invoke(pValue));
 				}
@@ -152,7 +152,7 @@ namespace RecommendationsModel
 		{
 			List<double> res = DefautResult();
 
-			double height = (double)value;
+			double height = Convert.ToDouble(value, new System.Globalization.CultureInfo("en-US")); //"1.5 vs 1,5"
 
 			if (height < 165.0) //Низкий рост
 			{
@@ -191,7 +191,7 @@ namespace RecommendationsModel
 			ParamFunctions = new List<Func<object, List<double>>>() { BodyType, Height, HeightToWeight };
 
 			//Let all weights sum up to 1
-			ParamWeights = new List<double>() { 0.7, 0.15, 0.25 };
+			ParamWeights = new List<double>() { 0.7, 0.15, 0.15 };
 		}
 	}
 }

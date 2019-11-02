@@ -6,6 +6,6 @@ namespace RussianModnik
 {
 	public static class Settings
 	{
-		public static readonly string SettingsFileName = "settings.xml";
+		public static readonly string SettingsFileName = "settings.xaml";
 	}
 }

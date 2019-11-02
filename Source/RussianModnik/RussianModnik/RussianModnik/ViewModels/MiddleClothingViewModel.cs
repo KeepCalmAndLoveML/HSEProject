@@ -10,46 +10,51 @@ using Xamarin.Forms;
 
 namespace RussianModnik.ViewModels
 {
-	public class MiddleClothingViewModel : BaseViewModel
-	{
-		public List<MiddleClothing> Items { get; set; }
-		public Command LoadItemsCommand { get; set; }
+    public class MiddleClothingViewModel : BaseViewModel
+    {
+        public List<MiddleClothing> Items { get; set; }
+        public Command LoadItemsCommand { get; set; }
 
-		public MiddleClothingViewModel()
-		{
-			Title = "Поясная группа";
+        public MiddleClothingViewModel()
+        {
+            Title = "Поясная группа";
 
-			Items = MiddleClothingStore.MainStore.GetItems().ToList();
-			LoadItemsCommand = new Command((obj) => ExecuteLoadItemsCommand(obj as Gender?));
-		}
+            Items = MiddleClothingStore.MainStore.GetItems().ToList();
+            LoadItemsCommand = new Command((obj) => ExecuteLoadItemsCommand(obj as Gender?));
 
-		void ExecuteLoadItemsCommand(Gender? gender)
-		{
-			if (!gender.HasValue)
-				gender = Gender.Female;
+            MessagingCenter.Subscribe<ParamsViewModel>(this, "Predictions computed", (ParamsViewModel vm) =>
+            {
+                LoadItemsCommand.Execute(Gender.Female);
+            });
+        }
 
-			if (IsBusy)
-				return;
+        void ExecuteLoadItemsCommand(Gender? gender)
+        {
+            if (!gender.HasValue)
+                gender = Gender.Female;
 
-			IsBusy = true;
+            if (IsBusy)
+                return;
 
-			try
-			{
-				Items.Clear();
-				var items = MiddleClothingStore.MainStore.GetItems(gender.Value);
-				foreach (var item in items)
-				{
-					Items.Add(item);
-				}
-			}
-			catch (Exception ex)
-			{
+            IsBusy = true;
 
-			}
-			finally
-			{
-				IsBusy = false;
-			}
-		}
-	}
+            try
+            {
+                Items.Clear();
+                var items = MiddleClothingStore.MainStore.GetItemsPref(gender.Value);
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+    }
 }
