@@ -21,6 +21,10 @@
     <None Remove="Images\Eyes\green_eyes.png" />
     <None Remove="Images\eye_one.png" />
     <None Remove="Images\MiddleClothing\jeans.png" />
+    <None Remove="Images\Shoes\heels.png" />
+    <None Remove="Images\Shoes\heels2.png" />
+    <None Remove="Images\Shoes\sneakers.png" />
+    <None Remove="Images\Shoes\sneakers2.png" />
     <None Remove="settings.xml" />
   </ItemGroup>
 
@@ -35,6 +39,10 @@
     <EmbeddedResource Include="Images\Eyes\gray_eyes.png" />
     <EmbeddedResource Include="Images\Eyes\green_eyes.png" />
     <EmbeddedResource Include="Images\eye_one.png" />
+    <EmbeddedResource Include="Images\Shoes\heels.png" />
+    <EmbeddedResource Include="Images\Shoes\heels2.png" />
+    <EmbeddedResource Include="Images\Shoes\sneakers.png" />
+    <EmbeddedResource Include="Images\Shoes\sneakers2.png" />
     <EmbeddedResource Include="settings.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -61,6 +69,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ParamsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ShoesDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ShoesPage.xaml">

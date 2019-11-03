@@ -64,9 +64,7 @@ namespace RussianModnik.Views
                 {
                     ShowParams();
 
-                    IsBusy = false;
-                    ActivityFrame.IsVisible = false;
-                    MainIndicator.IsRunning = false;
+                    UnBusy();
                 });
             });
         }
@@ -79,25 +77,39 @@ namespace RussianModnik.Views
 
             Task.Factory.StartNew(() =>
             {
-                if (!SaveParams())
+                string saveRes = SaveParams();
+                if (!string.IsNullOrEmpty(saveRes))
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        DisplayAlert("Неверно введены параметры", saveRes, "Ок");
+                        UnBusy();
+                    });
                     return;
+                }
 
                 ViewModel.ComputePredictions();
                 Task.Delay(2000).Wait();
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    IsBusy = false;
-                    ActivityFrame.IsVisible = MainIndicator.IsRunning = false;
+                    UnBusy();
                 });
             }
             );
+        }
+
+        private void UnBusy()
+        {
+            IsBusy = false;
+            ActivityFrame.IsVisible = MainIndicator.IsRunning = false;
         }
 
         private void ShowParams()
         {
             HeightEntry.Text = ViewModel.ParamValues.Height.ToString();
             WeightEntry.Text = ViewModel.ParamValues.Weight.ToString();
+            FeetLength.Text = ViewModel.ParamValues.FeetLength.ToString();
             if (ViewModel.ParamValues.GenderIsMan)
                 GenderPicker.SelectedItem = "Мужчина";
             else
@@ -105,43 +117,52 @@ namespace RussianModnik.Views
             BodyTypePicker.SelectedItem = ViewModel.ParamValues.BodyType;
         }
 
-        private bool SaveParams()
+        private string SaveParams()
         {
+            //NOTE: DisplayAlert Doesn't work in tasks
+
             double temp;
             if (double.TryParse(HeightEntry.Text, out temp))
                 ViewModel.ParamValues.Height = temp;
             else
             {
-                DisplayAlert("Неверно введены параметры", $"Рост не может быть: {HeightEntry.Text}. Пожалуйста, введите число", "Ок");
-                return false;
+                return $"Рост не может быть: {HeightEntry.Text}. Пожалуйста, введите число"; 
             }
 
             if (double.TryParse(WeightEntry.Text, out temp))
                 ViewModel.ParamValues.Weight = temp;
             else
             {
-                DisplayAlert("Неверно введены параметры", $"Рост не может быть: {WeightEntry.Text}. Пожалуйста, введите число", "Ок");
-                return false;
+                //DisplayAlert("Неверно введены параметры", $"Рост не может быть: {WeightEntry.Text}. Пожалуйста, введите число", "Ок");
+                return $"Рост не может быть: {WeightEntry.Text}. Пожалуйста, введите число";
+            }
+
+            if (double.TryParse(FeetLength.Text, out temp))
+                ViewModel.ParamValues.FeetLength = temp;
+            else
+            {
+                //DisplayAlert("Неверно введены параметры", $"Длина стопы не может быть: {FeetLength.Text}. Пожалуйста, введите число", "Ок");
+                return $"Длина стопы не может быть: {FeetLength.Text}. Пожалуйста, введите число";
             }
 
             if (string.IsNullOrEmpty(GenderPicker.SelectedItem.ToString()))
             {
-                DisplayAlert("Неверное введены параметры", "Выберите пол", "Ок");
-                return false;
+                //DisplayAlert("Неверное введены параметры", "Выберите пол", "Ок");
+                return "Выберите пол";
             }
             else 
                 ViewModel.ParamValues.GenderIsMan = GenderPicker.SelectedItem.ToString() == "Мужчина";
 
             if (string.IsNullOrEmpty(BodyTypePicker.SelectedItem.ToString()))
             {
-                DisplayAlert("Неверное введены параметры", "Выберите тип фигуры", "Ок");
-                return false;
+                //DisplayAlert("Неверное введены параметры", "Выберите тип фигуры", "Ок");
+                return "Выберите тип фигуры";
             }
             else 
                 ViewModel.ParamValues.BodyType = BodyTypePicker.SelectedItem.ToString();
 
             ViewModel.SaveParams();
-            return true;
+            return string.Empty;
         }
 
         public ParamsPage(ParamsViewModel viewModel) : this()

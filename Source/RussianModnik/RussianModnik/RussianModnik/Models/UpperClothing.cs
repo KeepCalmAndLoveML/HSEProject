@@ -38,7 +38,7 @@ namespace RussianModnik.Models
                 int index = Floor((height - BaseHeight) / Step);
                 if (index < 0)
                     index = 0;
-                return "RU " + BaseSizeRus + index;
+                return "RU " + (BaseSizeRus + index);
 			}
 
 			public static string ToSizeEu(double height)
@@ -50,7 +50,7 @@ namespace RussianModnik.Models
                 int index = Floor((height - BaseHeight) / Step);
                 if (index < 0)
                     index = 0;
-                return "EU " + BaseSizeEU + index;
+                return "EU " + (BaseSizeEU + index);
 			}
 		}
 	}

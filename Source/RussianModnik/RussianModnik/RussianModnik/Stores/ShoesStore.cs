@@ -21,15 +21,15 @@ namespace RussianModnik.Stores
                 {
                     Id = Guid.NewGuid().ToString(),
                     Title = "Удобная убовь",
-                    RessourceIdSmall = "BodyTypes.wbt_one.png".ToImageRessourceId(),
-                    RessourceIdDetail = "BodyTypes.wbt_one.png".ToImageRessourceId(),
+                    RessourceIdSmall = "Shoes.sneakers.png".ToImageRessourceId(),
+                    RessourceIdDetail = "Shoes.sneakers2.png".ToImageRessourceId(),
                 },
                 new Shoes()
                 {
                     Id = Guid.NewGuid().ToString(),
                     Title = "Туфли",
-                    RessourceIdSmall = "BodyTypes.wbt_one.png".ToImageRessourceId(),
-                    RessourceIdDetail = "BodyTypes.wbt_one.png".ToImageRessourceId(),
+                    RessourceIdSmall = "Shoes.heels.png".ToImageRessourceId(),
+                    RessourceIdDetail = "Shoes.heels2.png".ToImageRessourceId(),
                 }
             };
 

@@ -51,6 +51,18 @@ namespace RecommendationsModel
 
         public bool TryLoadParams()
         {
+            //THIS IS A TEMPORARY SOLUTION FOR THE PROTOTYPE TO WORK.
+            //IN THE FUTURE, PARAM VALUES WILL BE STORED IN FILES AND NOT IN SHARED PREFS
+            //THE CODE AFTER THE RETURN WILL BE WHAT WILL BE USED
+            Preloaded = new object[ParamsCount];
+
+            Preloaded[HeightIndex] = DataManager.GetValue("Height");
+            Preloaded[WeightIndex] = DataManager.GetValue("HeightToWeight");
+            Preloaded[BodyTypeIndex] = DataManager.GetValue("BodyType");
+
+            return Preloaded.All(x => !string.IsNullOrEmpty(x as string)); //DataManager.GetValue returns an empty string if the value wasn't there
+
+
             //If the value of a certain param has not been passed, where should we set it's value to default?
 
             //The hole code above will be replaced by the following query

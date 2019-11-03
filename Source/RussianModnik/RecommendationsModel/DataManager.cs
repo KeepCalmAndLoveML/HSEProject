@@ -17,7 +17,7 @@ namespace RecommendationsModel
     //Also, all data management should be run asynchronously
     public static class DataManager
     {
-        public readonly static string BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        public readonly static string BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
         private static XDocument LastDocument;
 
@@ -43,6 +43,22 @@ namespace RecommendationsModel
 
             IsDocumentLoading = false;
             System.Diagnostics.Debug.WriteLine("done");
+        }
+
+        //Gets value for shared preference
+        public static string GetValue(string key)
+        {
+            return Preferences.Get(key, string.Empty);
+        }
+
+        public static void SetValue(string key, string value)
+        {
+            Preferences.Set(key, value);
+        }
+
+        public static bool HasKey(string key)
+        {
+            return Preferences.ContainsKey(key);
         }
 
         public static List<string> GetValue(Queue<DataPathElement> query)

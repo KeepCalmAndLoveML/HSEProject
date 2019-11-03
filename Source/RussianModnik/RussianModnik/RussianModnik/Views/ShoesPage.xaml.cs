@@ -29,7 +29,7 @@ namespace RussianModnik.Views
 			Shoes Item;
 			if (ItemsListView.TryGetSelectedItem(args, out Item))
 			{
-				//await Navigation.PushAsync(new (new UpperClothingDetailViewModel(Item)));
+                await Navigation.PushAsync(new ShoesDetailPage(new ShoesDetailViewModel(Item)));
 			}
 		}
 	}

@@ -29,6 +29,19 @@ namespace RussianModnik.Stores
         {
             if (!DataManager.IsDocumentLoaded && !DataManager.IsDocumentLoading)
                 DataManager.LoadDocument(Settings.SettingsFileName);
+
+            //Set all the default params into preferences
+            //Store them here for the prototype to work nicely. Clearly, the final version will use .xml files for settings
+            if (!DataManager.HasKey("Height"))
+                DataManager.SetValue("Height", "175");
+            if (!DataManager.HasKey("HeightToWeight"))
+                DataManager.SetValue("HeightToWeight", (175 / 55).ToString());
+            if (!DataManager.HasKey("BodyType"))
+                DataManager.SetValue("BodyType", "Песочные часы");
+            if (!DataManager.HasKey("GenderIsMan"))
+                DataManager.SetValue("GenderIsMan", "0");
+            if (!DataManager.HasKey("FeetLength"))
+                DataManager.SetValue("FeetLength", "25");
         }
 
         public Task<Parameter> GetItemAsync(string id)
@@ -89,6 +102,23 @@ namespace RussianModnik.Stores
             });
         }
 
+        //THIS IS A TEMPORARY SOLUTION FOR THE PROTOTYPE TO WORK.
+        //IN THE FUTURE, PARAM VALUES WILL BE STORED IN FILES AND NOT IN SHARED PREFS
+        public IEnumerable<Parameter> GetItems()
+        {
+            string height = DataManager.GetValue("Height");
+            string weight = DataManager.GetValue("HeightToWeight");
+            string bodyType = DataManager.GetValue("BodyType");
+            string gender = DataManager.GetValue("GenderIsMan");
+            string feetLength = DataManager.GetValue("FeetLength");
+
+            yield return new Parameter(bodyType, 0, "BodyType");
+            yield return new Parameter(height, 1, "Height");
+            yield return new Parameter(weight, 2, "HeightToWeight");
+            yield return new Parameter(gender, 3, "GenderIsMan");
+            yield return new Parameter(feetLength, 4, "FeetLength");
+        }
+
         //Change Value of a Parameter
         public Task<bool> UpdateItemAsync(Parameter item)
         {
@@ -120,9 +150,19 @@ namespace RussianModnik.Stores
 
         }
 
+        //THIS IS A TEMPORARY SOLUTION FOR THE PROTOTYPE TO WORK.
+        //IN THE FUTURE, PARAM VALUES WILL BE STORED IN FILES AND NOT IN SHARED PREFS
+        public bool UpdateItem(Parameter item)
+        {
+            DataManager.SetValue(item.Key, item.Value.ToString());
+
+            return true;
+        }
+
         public async void SaveData()
         {
-            await DataManager.SaveXml(Settings.SettingsFileName);
+            //Uncomment this after prototype is shown 
+            //await DataManager.SaveXml(Settings.SettingsFileName);
         }
     }
 }

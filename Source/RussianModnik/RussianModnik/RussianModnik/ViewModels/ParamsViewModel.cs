@@ -22,13 +22,15 @@ namespace RussianModnik.ViewModels
             ["Height"] = 175.0,
             ["Weight"] = 55.0,
             ["GenderIsMan"] = false,
-            ["BodyType"] = "Песочные часы"
+            ["BodyType"] = "Песочные часы",
+            ["FeetLength"] = 25.0,
         };
 
         public double Height { get; set; } = (double)DefaultValues["Height"];
         public double Weight { get; set; } = (double)DefaultValues["Weight"];
         public bool GenderIsMan { get; set; } = (bool)DefaultValues["GenderIsMan"];
         public string BodyType { get; set; } = (string)DefaultValues["BodyType"];
+        public double FeetLength { get; set; } = (double)DefaultValues["FeetLength"];
 
         public ParameterCollection()
         {
@@ -37,7 +39,7 @@ namespace RussianModnik.ViewModels
 
         public void InitializeFrom(ParamsStore storage)
         {
-            var items = storage.GetItemsAsync().Result;
+            var items = storage.GetItems();
             CultureInfo info = new CultureInfo("en-US");
             foreach (Parameter p in items)
             {
@@ -59,6 +61,9 @@ namespace RussianModnik.ViewModels
                     case "BodyType":
                         BodyType = p.Value as string;
                         break;
+                    case "FeetLength":
+                        FeetLength = double.Parse(p.Value as string, info);
+                        break;
                 }
             }
         }
@@ -66,6 +71,18 @@ namespace RussianModnik.ViewModels
         public async void SaveTo(ParamsStore storage)
         {
             var boolToInt = new Func<bool, int>(x => x ? 1 : 0);
+
+            //THIS IS A TEMPORARY SOLUTION FOR THE PROTOTYPE TO WORK.
+            //IN THE FUTURE, PARAM VALUES WILL BE STORED IN FILES AND NOT IN SHARED PREFS
+            //THE CODE AFTER THE RETURN WILL BE WHAT WILL BE USED            
+
+            storage.UpdateItem(new Parameter(Height, WomenParameterExtractor.HeightIndex, "Height"));
+            storage.UpdateItem(new Parameter(BodyType, WomenParameterExtractor.BodyTypeIndex, "BodyType"));
+            storage.UpdateItem(new Parameter(Height / Weight, WomenParameterExtractor.WeightIndex, "HeightToWeight"));
+            storage.UpdateItem(new Parameter(boolToInt(GenderIsMan), WomenParameterExtractor.GenderIndex, "GenderIsMan"));
+            storage.UpdateItem(new Parameter(FeetLength, 4, "FeetLength"));
+
+            return;
 
             await storage.UpdateItemAsync(new Parameter(Height, WomenParameterExtractor.HeightIndex, "Height"));
             await storage.UpdateItemAsync(new Parameter(BodyType, WomenParameterExtractor.BodyTypeIndex, "BodyType"));

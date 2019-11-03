@@ -6,8 +6,8 @@ namespace RussianModnik.Models
 {
 	public class Shoes : ItemBase
 	{
-		//Represents a universal size (foot length in mm)
-		public double Size { get; set; } = 25;
+		//Represents a universal size (foot length in cm)
+		public double Size { get; set; } = 255;
 
 		public string ShoeSizeUS => ShoeSizeHelper.GetShoeSizeUS(Size, this.Gender);
 		public string ShoeSizeEU => ShoeSizeHelper.GetShoeSizeEU(Size, this.Gender);

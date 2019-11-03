@@ -82,7 +82,10 @@
 								<Label Text="Вес" Margin="3, 15, 0, 0"/>
 								<Entry x:Name="WeightEntry" Placeholder="Ваш вес" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
 
-								<Picker x:Name="GenderPicker" Title="Пол" SelectedIndex="0" Margin="3, 25, 0, 0" 
+                                <Label Text="Длина стопы (мм)" Margin="3, 15, 0, 0"/>
+                                <Entry x:Name="FeetLength" Placeholder="Длина вашей ноги" Focused="EntryFocused" PlaceholderColor="{StaticResource GrayPrimary}"/>
+
+                                <Picker x:Name="GenderPicker" Title="Пол" SelectedIndex="0" Margin="3, 25, 0, 0" 
 									SelectedIndexChanged="GenderPicker_SelectedIndexChanged"
 									BackgroundColor="{StaticResource White}" TitleColor="{StaticResource Dark}">
 									<Picker.Items>
