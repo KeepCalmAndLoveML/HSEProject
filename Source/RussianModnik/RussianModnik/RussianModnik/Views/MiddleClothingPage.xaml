@@ -26,11 +26,12 @@
                        Style="{DynamicResource ListItemTextStyle}" 
                        FontSize="16"
 				   HorizontalOptions="Center"/>
+                                <!--
 								<Label Text="{Binding Description}" 
                        LineBreakMode="NoWrap"
                        Style="{DynamicResource ListItemDetailTextStyle}"
                        FontSize="13"
-				   HorizontalOptions="Center"/>
+				   HorizontalOptions="Center"/> -->
 
 								<!--<BoxView BackgroundColor="Gray" HeightRequest="100" Margin="50, 0"/> -->
 								<Image HeightRequest="128" WidthRequest="128" Margin="50, 0" HorizontalOptions="Center"

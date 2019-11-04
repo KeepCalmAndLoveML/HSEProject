@@ -8,6 +8,8 @@ using RussianModnik.Stores;
 
 using RecommendationsModel;
 
+using Xamarin.Essentials;
+
 using Xam.Plugin.SimpleAppIntro;
 
 namespace RussianModnik
@@ -18,7 +20,7 @@ namespace RussianModnik
         public App()
         {
             InitializeComponent();
-
+ 
             //Load data before anything else
             DataManager.LoadDocument(Settings.SettingsFileName);
 

@@ -106,7 +106,7 @@ namespace RecommendationsModel
 			switch (name)
 			{
 				case "Песочные часы":
-					SetValue(res, "Балахоны", WeightValue.VeryBad);
+					//SetValue(res, "Балахоны", WeightValue.VeryBad);
 
 					SetValue(res, "Платье", WeightValue.MediumGood);
 					SetValue(res, "Юбка", WeightValue.MediumGood);
@@ -114,7 +114,7 @@ namespace RecommendationsModel
 					SetValue(res, "Блузка", WeightValue.VeryGood);
 					break;
 				case "Треугольник (Груша)":
-					SetValue(res, "Платье", WeightValue.MediumBad);
+					SetValue(res, "Платье", WeightValue.VeryBad);
 
 					SetValue(res, "Жакет", WeightValue.MediumGood);
 					SetValue(res, "Футболка", WeightValue.MediumGood);
@@ -125,7 +125,7 @@ namespace RecommendationsModel
 					SetValue(res, "Юбка", WeightValue.VeryGood);
 					break;
 				case "Перевернутый треугольник":
-					SetValue(res, "Жакет", WeightValue.MediumBad);
+					SetValue(res, "Жакет", WeightValue.VeryBad);
 
 					SetValue(res, "Юбка", WeightValue.MediumGood);
 					SetValue(res, "Брюки", WeightValue.MediumGood);
@@ -156,7 +156,11 @@ namespace RecommendationsModel
 
 			if (height < 165.0) //Низкий рост
 			{
-				SetValue(res, "Брюки", WeightValue.MediumGood);
+                SetValue(res, "Юбка", WeightValue.VeryBad);
+                SetValue(res, "Жакет", WeightValue.VeryBad);
+                SetValue(res, "Кардиган", WeightValue.VeryBad);
+
+                SetValue(res, "Брюки", WeightValue.MediumGood);
 
 				SetValue(res, "Жилет", WeightValue.VeryGood);
 			}
@@ -177,6 +181,7 @@ namespace RecommendationsModel
 			var res = DefautResult();
 
 			//Do Something here...
+            //It turns out that the span of clothes I use is too small for this to be applicable
 
 			return res;
 		}
@@ -191,7 +196,7 @@ namespace RecommendationsModel
 			ParamFunctions = new List<Func<object, List<double>>>() { BodyType, Height, HeightToWeight };
 
 			//Let all weights sum up to 1
-			ParamWeights = new List<double>() { 0.7, 0.15, 0.15 };
+			ParamWeights = new List<double>() { 0.6, 0.4, 0 };
 		}
 	}
 }

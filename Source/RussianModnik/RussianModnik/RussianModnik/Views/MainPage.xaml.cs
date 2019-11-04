@@ -20,6 +20,10 @@ namespace RussianModnik.Views
 		{
 			InitializeComponent();
 
+            if (DataManager.HasKey("ShowTutorial")) 
+                return; //All code below is just showing intro
+
+            DataManager.SetValue("ShowTutorial", "1");
 			WelcomePage = new AnimatedSimpleAppIntro(new List<object>() {
 				new Slide(new SlideConfig(
 					"Добро пожаловать!",
